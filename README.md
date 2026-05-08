@@ -22,8 +22,8 @@ diagonal-scale-plus-bias update on `W_O` during ZSL inference.
 
 ## Install
 
-Requires Python ≥ 3.10 and a single CUDA GPU with ≥ 24 GB VRAM (the 8 B
-models comfortably fit on an A6000). From the repo root:
+Requires Python ≥ 3.10 and a single CUDA GPU; an A100 fits the 8 B models
+comfortably. From the repo root:
 
 ```bash
 pip install -e .
@@ -41,7 +41,7 @@ python examples/quickstart.py
 
 Loads Qwen3-4B + the `uppercase` task, runs ZSL, 8-shot ICL, then extracts a
 TO and applies it at ZSL — printing the three accuracies side by side. Should
-finish in a few minutes on a single A6000.
+finish in a few minutes on a single A100.
 
 ## Reproducing the main table
 
