@@ -1,0 +1,649 @@
+{
+  "task": "translation",
+  "category": "lexical",
+  "split": "test",
+  "seed": 0,
+  "n_records": 128,
+  "records": [
+    {
+      "example_id": "translation_0706",
+      "input": "wait",
+      "target": "attendre"
+    },
+    {
+      "example_id": "translation_0217",
+      "input": "exist",
+      "target": "exister"
+    },
+    {
+      "example_id": "translation_0296",
+      "input": "home",
+      "target": "domicile"
+    },
+    {
+      "example_id": "translation_0356",
+      "input": "level",
+      "target": "niveau"
+    },
+    {
+      "example_id": "translation_0354",
+      "input": "let",
+      "target": "laisser"
+    },
+    {
+      "example_id": "translation_0432",
+      "input": "office",
+      "target": "bureau"
+    },
+    {
+      "example_id": "translation_0591",
+      "input": "simple",
+      "target": "facile"
+    },
+    {
+      "example_id": "translation_0258",
+      "input": "full",
+      "target": "complet"
+    },
+    {
+      "example_id": "translation_0608",
+      "input": "somebody",
+      "target": "quelqu'un"
+    },
+    {
+      "example_id": "translation_0635",
+      "input": "strategy",
+      "target": "strat\u00e9gie"
+    },
+    {
+      "example_id": "translation_0574",
+      "input": "send",
+      "target": "envoyer"
+    },
+    {
+      "example_id": "translation_0477",
+      "input": "piece",
+      "target": "pi\u00e8ce"
+    },
+    {
+      "example_id": "translation_0531",
+      "input": "reason",
+      "target": "raison"
+    },
+    {
+      "example_id": "translation_0384",
+      "input": "meet",
+      "target": "rencontrer"
+    },
+    {
+      "example_id": "translation_0017",
+      "input": "air",
+      "target": "air"
+    },
+    {
+      "example_id": "translation_0262",
+      "input": "general",
+      "target": "g\u00e9n\u00e9ral"
+    },
+    {
+      "example_id": "translation_0449",
+      "input": "order",
+      "target": "ordre"
+    },
+    {
+      "example_id": "translation_0548",
+      "input": "resource",
+      "target": "ressource"
+    },
+    {
+      "example_id": "translation_0315",
+      "input": "in",
+      "target": "dans"
+    },
+    {
+      "example_id": "translation_0704",
+      "input": "voice",
+      "target": "voix"
+    },
+    {
+      "example_id": "translation_0599",
+      "input": "situation",
+      "target": "situation"
+    },
+    {
+      "example_id": "translation_0002",
+      "input": "able",
+      "target": "pouvoir"
+    },
+    {
+      "example_id": "translation_0737",
+      "input": "young",
+      "target": "jeune"
+    },
+    {
+      "example_id": "translation_0577",
+      "input": "serve",
+      "target": "servir"
+    },
+    {
+      "example_id": "translation_0319",
+      "input": "individual",
+      "target": "individuel"
+    },
+    {
+      "example_id": "translation_0295",
+      "input": "hold",
+      "target": "tenir"
+    },
+    {
+      "example_id": "translation_0634",
+      "input": "story",
+      "target": "r\u00e9cit"
+    },
+    {
+      "example_id": "translation_0302",
+      "input": "how",
+      "target": "comment"
+    },
+    {
+      "example_id": "translation_0056",
+      "input": "be",
+      "target": "\u00eatre"
+    },
+    {
+      "example_id": "translation_0559",
+      "input": "room",
+      "target": "pi\u00e8ce"
+    },
+    {
+      "example_id": "translation_0214",
+      "input": "evidence",
+      "target": "preuve"
+    },
+    {
+      "example_id": "translation_0069",
+      "input": "big",
+      "target": "grand"
+    },
+    {
+      "example_id": "translation_0546",
+      "input": "require",
+      "target": "exiger"
+    },
+    {
+      "example_id": "translation_0325",
+      "input": "interview",
+      "target": "entrevue"
+    },
+    {
+      "example_id": "translation_0136",
+      "input": "control",
+      "target": "contr\u00f4ler"
+    },
+    {
+      "example_id": "translation_0385",
+      "input": "meeting",
+      "target": "rencontre"
+    },
+    {
+      "example_id": "translation_0094",
+      "input": "card",
+      "target": "carte"
+    },
+    {
+      "example_id": "translation_0681",
+      "input": "training",
+      "target": "entra\u00eenement"
+    },
+    {
+      "example_id": "translation_0078",
+      "input": "boy",
+      "target": "gar\u00e7on"
+    },
+    {
+      "example_id": "translation_0372",
+      "input": "low",
+      "target": "meugler"
+    },
+    {
+      "example_id": "translation_0180",
+      "input": "door",
+      "target": "porte"
+    },
+    {
+      "example_id": "translation_0102",
+      "input": "central",
+      "target": "central"
+    },
+    {
+      "example_id": "translation_0271",
+      "input": "great",
+      "target": "super"
+    },
+    {
+      "example_id": "translation_0034",
+      "input": "area",
+      "target": "r\u00e9gion"
+    },
+    {
+      "example_id": "translation_0130",
+      "input": "compare",
+      "target": "comparer"
+    },
+    {
+      "example_id": "translation_0251",
+      "input": "foreign",
+      "target": "\u00e9tranger"
+    },
+    {
+      "example_id": "translation_0526",
+      "input": "read",
+      "target": "lire"
+    },
+    {
+      "example_id": "translation_0134",
+      "input": "congress",
+      "target": "congr\u00e8s"
+    },
+    {
+      "example_id": "translation_0182",
+      "input": "dream",
+      "target": "r\u00eaver"
+    },
+    {
+      "example_id": "translation_0567",
+      "input": "second",
+      "target": "seconde"
+    },
+    {
+      "example_id": "translation_0035",
+      "input": "argument",
+      "target": "argument"
+    },
+    {
+      "example_id": "translation_0257",
+      "input": "friend",
+      "target": "ami"
+    },
+    {
+      "example_id": "translation_0261",
+      "input": "game",
+      "target": "jeu"
+    },
+    {
+      "example_id": "translation_0570",
+      "input": "see",
+      "target": "voir"
+    },
+    {
+      "example_id": "translation_0303",
+      "input": "however",
+      "target": "pourtant"
+    },
+    {
+      "example_id": "translation_0272",
+      "input": "ground",
+      "target": "terre"
+    },
+    {
+      "example_id": "translation_0108",
+      "input": "change",
+      "target": "monnaie"
+    },
+    {
+      "example_id": "translation_0081",
+      "input": "bring",
+      "target": "apporter"
+    },
+    {
+      "example_id": "translation_0232",
+      "input": "few",
+      "target": "peu"
+    },
+    {
+      "example_id": "translation_0474",
+      "input": "physical",
+      "target": "physique"
+    },
+    {
+      "example_id": "translation_0151",
+      "input": "daughter",
+      "target": "fille"
+    },
+    {
+      "example_id": "translation_0646",
+      "input": "support",
+      "target": "support"
+    },
+    {
+      "example_id": "translation_0030",
+      "input": "any",
+      "target": "quelconque"
+    },
+    {
+      "example_id": "translation_0114",
+      "input": "choose",
+      "target": "choisir"
+    },
+    {
+      "example_id": "translation_0485",
+      "input": "policy",
+      "target": "politique"
+    },
+    {
+      "example_id": "translation_0598",
+      "input": "site",
+      "target": "site"
+    },
+    {
+      "example_id": "translation_0221",
+      "input": "fact",
+      "target": "fait"
+    },
+    {
+      "example_id": "translation_0373",
+      "input": "major",
+      "target": "majeur"
+    },
+    {
+      "example_id": "translation_0439",
+      "input": "okay",
+      "target": "d'accord"
+    },
+    {
+      "example_id": "translation_0390",
+      "input": "method",
+      "target": "m\u00e9thode"
+    },
+    {
+      "example_id": "translation_0590",
+      "input": "similar",
+      "target": "similaire"
+    },
+    {
+      "example_id": "translation_0705",
+      "input": "vote",
+      "target": "voter"
+    },
+    {
+      "example_id": "translation_0644",
+      "input": "summer",
+      "target": "\u00e9t\u00e9"
+    },
+    {
+      "example_id": "translation_0632",
+      "input": "still",
+      "target": "toujours"
+    },
+    {
+      "example_id": "translation_0472",
+      "input": "phone",
+      "target": "t\u00e9l\u00e9phoner"
+    },
+    {
+      "example_id": "translation_0160",
+      "input": "democrat",
+      "target": "d\u00e9mocrate"
+    },
+    {
+      "example_id": "translation_0433",
+      "input": "officer",
+      "target": "officier"
+    },
+    {
+      "example_id": "translation_0484",
+      "input": "police",
+      "target": "police"
+    },
+    {
+      "example_id": "translation_0683",
+      "input": "treatment",
+      "target": "traitement"
+    },
+    {
+      "example_id": "translation_0604",
+      "input": "so",
+      "target": "alors"
+    },
+    {
+      "example_id": "translation_0029",
+      "input": "answer",
+      "target": "r\u00e9ponse"
+    },
+    {
+      "example_id": "translation_0465",
+      "input": "people",
+      "target": "gens"
+    },
+    {
+      "example_id": "translation_0596",
+      "input": "sister",
+      "target": "s\u0153ur"
+    },
+    {
+      "example_id": "translation_0510",
+      "input": "prove",
+      "target": "prouver"
+    },
+    {
+      "example_id": "translation_0687",
+      "input": "try",
+      "target": "essayer"
+    },
+    {
+      "example_id": "translation_0139",
+      "input": "country",
+      "target": "pays"
+    },
+    {
+      "example_id": "translation_0152",
+      "input": "day",
+      "target": "journ\u00e9e"
+    },
+    {
+      "example_id": "translation_0420",
+      "input": "next",
+      "target": "suivant"
+    },
+    {
+      "example_id": "translation_0427",
+      "input": "nothing",
+      "target": "rien"
+    },
+    {
+      "example_id": "translation_0045",
+      "input": "attack",
+      "target": "attaque"
+    },
+    {
+      "example_id": "translation_0731",
+      "input": "world",
+      "target": "monde"
+    },
+    {
+      "example_id": "translation_0440",
+      "input": "old",
+      "target": "vieille"
+    },
+    {
+      "example_id": "translation_0092",
+      "input": "candidate",
+      "target": "candidat"
+    },
+    {
+      "example_id": "translation_0522",
+      "input": "raise",
+      "target": "\u00e9lever"
+    },
+    {
+      "example_id": "translation_0355",
+      "input": "letter",
+      "target": "lettre"
+    },
+    {
+      "example_id": "translation_0141",
+      "input": "course",
+      "target": "cours"
+    },
+    {
+      "example_id": "translation_0219",
+      "input": "eye",
+      "target": "\u0153il"
+    },
+    {
+      "example_id": "translation_0087",
+      "input": "buy",
+      "target": "acheter"
+    },
+    {
+      "example_id": "translation_0703",
+      "input": "visit",
+      "target": "visite"
+    },
+    {
+      "example_id": "translation_0057",
+      "input": "beautiful",
+      "target": "beau"
+    },
+    {
+      "example_id": "translation_0003",
+      "input": "about",
+      "target": "sur"
+    },
+    {
+      "example_id": "translation_0450",
+      "input": "organization",
+      "target": "organisation"
+    },
+    {
+      "example_id": "translation_0374",
+      "input": "make",
+      "target": "fabriquer"
+    },
+    {
+      "example_id": "translation_0121",
+      "input": "close",
+      "target": "fermer"
+    },
+    {
+      "example_id": "translation_0107",
+      "input": "chance",
+      "target": "chance"
+    },
+    {
+      "example_id": "translation_0422",
+      "input": "night",
+      "target": "nuit"
+    },
+    {
+      "example_id": "translation_0492",
+      "input": "power",
+      "target": "puissance"
+    },
+    {
+      "example_id": "translation_0181",
+      "input": "draw",
+      "target": "dessiner"
+    },
+    {
+      "example_id": "translation_0549",
+      "input": "respond",
+      "target": "r\u00e9pondre"
+    },
+    {
+      "example_id": "translation_0463",
+      "input": "patient",
+      "target": "patient"
+    },
+    {
+      "example_id": "translation_0378",
+      "input": "material",
+      "target": "mat\u00e9riel"
+    },
+    {
+      "example_id": "translation_0072",
+      "input": "black",
+      "target": "noir"
+    },
+    {
+      "example_id": "translation_0054",
+      "input": "bank",
+      "target": "banque"
+    },
+    {
+      "example_id": "translation_0404",
+      "input": "mother",
+      "target": "m\u00e8re"
+    },
+    {
+      "example_id": "translation_0363",
+      "input": "list",
+      "target": "liste"
+    },
+    {
+      "example_id": "translation_0639",
+      "input": "study",
+      "target": "\u00e9tudier"
+    },
+    {
+      "example_id": "translation_0554",
+      "input": "risk",
+      "target": "risque"
+    },
+    {
+      "example_id": "translation_0293",
+      "input": "high",
+      "target": "haut"
+    },
+    {
+      "example_id": "translation_0238",
+      "input": "finally",
+      "target": "finalement"
+    },
+    {
+      "example_id": "translation_0089",
+      "input": "call",
+      "target": "appeler"
+    },
+    {
+      "example_id": "translation_0692",
+      "input": "union",
+      "target": "syndicat"
+    },
+    {
+      "example_id": "translation_0252",
+      "input": "form",
+      "target": "former"
+    },
+    {
+      "example_id": "translation_0688",
+      "input": "turn",
+      "target": "tour"
+    },
+    {
+      "example_id": "translation_0144",
+      "input": "create",
+      "target": "cr\u00e9er"
+    },
+    {
+      "example_id": "translation_0491",
+      "input": "post",
+      "target": "publier"
+    },
+    {
+      "example_id": "translation_0200",
+      "input": "else",
+      "target": "autre"
+    },
+    {
+      "example_id": "translation_0147",
+      "input": "current",
+      "target": "courant"
+    },
+    {
+      "example_id": "translation_0274",
+      "input": "grow",
+      "target": "cro\u00eetre"
+    }
+  ]
+}

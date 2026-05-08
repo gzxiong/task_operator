@@ -1,0 +1,649 @@
+{
+  "task": "deduplicate",
+  "category": "algorithmic",
+  "split": "test",
+  "seed": 0,
+  "n_records": 128,
+  "records": [
+    {
+      "example_id": "deduplicate_00175",
+      "input": "g e h d h h",
+      "target": "g e h d"
+    },
+    {
+      "example_id": "deduplicate_00688",
+      "input": "a a d a g c g f h f g",
+      "target": "a d g c f h"
+    },
+    {
+      "example_id": "deduplicate_00836",
+      "input": "g c c e h",
+      "target": "g c e h"
+    },
+    {
+      "example_id": "deduplicate_00742",
+      "input": "d c f a e e h g h e g",
+      "target": "d c f a e h g"
+    },
+    {
+      "example_id": "deduplicate_01382",
+      "input": "c f f f g b e",
+      "target": "c f g b e"
+    },
+    {
+      "example_id": "deduplicate_00270",
+      "input": "g h b c b",
+      "target": "g h b c"
+    },
+    {
+      "example_id": "deduplicate_00333",
+      "input": "e f d c h f",
+      "target": "e f d c h"
+    },
+    {
+      "example_id": "deduplicate_00231",
+      "input": "g d c a c a",
+      "target": "g d c a"
+    },
+    {
+      "example_id": "deduplicate_00023",
+      "input": "h a d h b b c f",
+      "target": "h a d b c f"
+    },
+    {
+      "example_id": "deduplicate_00657",
+      "input": "g b d c b b",
+      "target": "g b d c"
+    },
+    {
+      "example_id": "deduplicate_00789",
+      "input": "f d a c e c g b c g",
+      "target": "f d a c e g b"
+    },
+    {
+      "example_id": "deduplicate_00998",
+      "input": "h h e f h e",
+      "target": "h e f"
+    },
+    {
+      "example_id": "deduplicate_00857",
+      "input": "h a g a b f",
+      "target": "h a g b f"
+    },
+    {
+      "example_id": "deduplicate_01151",
+      "input": "h a h d d f e b g g g",
+      "target": "h a d f e b g"
+    },
+    {
+      "example_id": "deduplicate_00337",
+      "input": "f f g h h h",
+      "target": "f g h"
+    },
+    {
+      "example_id": "deduplicate_00851",
+      "input": "e f f g a c h c b f f e",
+      "target": "e f g a c h b"
+    },
+    {
+      "example_id": "deduplicate_00076",
+      "input": "b f b a a a",
+      "target": "b f a"
+    },
+    {
+      "example_id": "deduplicate_00414",
+      "input": "g g b e e a e e e a f d",
+      "target": "g b e a f d"
+    },
+    {
+      "example_id": "deduplicate_01344",
+      "input": "b f c d f g e f",
+      "target": "b f c d g e"
+    },
+    {
+      "example_id": "deduplicate_00678",
+      "input": "b a e g f f e",
+      "target": "b a e g f"
+    },
+    {
+      "example_id": "deduplicate_00259",
+      "input": "d e a e h d d h e",
+      "target": "d e a h"
+    },
+    {
+      "example_id": "deduplicate_01064",
+      "input": "a h b a a d b",
+      "target": "a h b d"
+    },
+    {
+      "example_id": "deduplicate_01073",
+      "input": "h g e f f b h h",
+      "target": "h g e f b"
+    },
+    {
+      "example_id": "deduplicate_00868",
+      "input": "a g c g e c d a f c f",
+      "target": "a g c e d f"
+    },
+    {
+      "example_id": "deduplicate_00462",
+      "input": "g a h a f c g h e",
+      "target": "g a h f c e"
+    },
+    {
+      "example_id": "deduplicate_00719",
+      "input": "e b d g b f h",
+      "target": "e b d g f h"
+    },
+    {
+      "example_id": "deduplicate_00190",
+      "input": "f h e c a h e a f h c",
+      "target": "f h e c a"
+    },
+    {
+      "example_id": "deduplicate_00192",
+      "input": "f d g a g h",
+      "target": "f d g a h"
+    },
+    {
+      "example_id": "deduplicate_01242",
+      "input": "h d d b a b h d",
+      "target": "h d b a"
+    },
+    {
+      "example_id": "deduplicate_00529",
+      "input": "c e a h a d b b g d h c",
+      "target": "c e a h d b g"
+    },
+    {
+      "example_id": "deduplicate_00379",
+      "input": "e g g g a b d",
+      "target": "e g a b d"
+    },
+    {
+      "example_id": "deduplicate_00359",
+      "input": "a d h b g a b d f a h",
+      "target": "a d h b g f"
+    },
+    {
+      "example_id": "deduplicate_00438",
+      "input": "c c d a f g f",
+      "target": "c d a f g"
+    },
+    {
+      "example_id": "deduplicate_01182",
+      "input": "g f h d a c f e d h h a",
+      "target": "g f h d a c e"
+    },
+    {
+      "example_id": "deduplicate_00435",
+      "input": "f g e d h a g a d f",
+      "target": "f g e d h a"
+    },
+    {
+      "example_id": "deduplicate_00930",
+      "input": "f f b h c h h h e g d h",
+      "target": "f b h c e g d"
+    },
+    {
+      "example_id": "deduplicate_01137",
+      "input": "a b b h f a d",
+      "target": "a b h f d"
+    },
+    {
+      "example_id": "deduplicate_00840",
+      "input": "g b d f g",
+      "target": "g b d f"
+    },
+    {
+      "example_id": "deduplicate_00470",
+      "input": "g d a c f c c g g b f",
+      "target": "g d a c f b"
+    },
+    {
+      "example_id": "deduplicate_00278",
+      "input": "g c b h d d",
+      "target": "g c b h d"
+    },
+    {
+      "example_id": "deduplicate_01324",
+      "input": "c b h d b e",
+      "target": "c b h d e"
+    },
+    {
+      "example_id": "deduplicate_01045",
+      "input": "d h e c h g c g e g h",
+      "target": "d h e c g"
+    },
+    {
+      "example_id": "deduplicate_00498",
+      "input": "b d a d d b",
+      "target": "b d a"
+    },
+    {
+      "example_id": "deduplicate_01190",
+      "input": "d d h e e d",
+      "target": "d h e"
+    },
+    {
+      "example_id": "deduplicate_00461",
+      "input": "b a g d e a f g c e h",
+      "target": "b a g d e f c h"
+    },
+    {
+      "example_id": "deduplicate_00496",
+      "input": "b a a e f h d g",
+      "target": "b a e f h d g"
+    },
+    {
+      "example_id": "deduplicate_00545",
+      "input": "a f a b c e g a d",
+      "target": "a f b c e g d"
+    },
+    {
+      "example_id": "deduplicate_00317",
+      "input": "d h b c h",
+      "target": "d h b c"
+    },
+    {
+      "example_id": "deduplicate_00709",
+      "input": "g f b a e b d",
+      "target": "g f b a e d"
+    },
+    {
+      "example_id": "deduplicate_01009",
+      "input": "b d g b a g e e f",
+      "target": "b d g a e f"
+    },
+    {
+      "example_id": "deduplicate_00487",
+      "input": "g f a f d a",
+      "target": "g f a d"
+    },
+    {
+      "example_id": "deduplicate_00320",
+      "input": "g c b b c a g c",
+      "target": "g c b a"
+    },
+    {
+      "example_id": "deduplicate_00786",
+      "input": "g f a g g h g g f f",
+      "target": "g f a h"
+    },
+    {
+      "example_id": "deduplicate_00586",
+      "input": "c a c a f c",
+      "target": "c a f"
+    },
+    {
+      "example_id": "deduplicate_00409",
+      "input": "g a a h g d e d a g",
+      "target": "g a h d e"
+    },
+    {
+      "example_id": "deduplicate_00443",
+      "input": "g e a c h b c g g b e",
+      "target": "g e a c h b"
+    },
+    {
+      "example_id": "deduplicate_00368",
+      "input": "d g b c b f f b",
+      "target": "d g b c f"
+    },
+    {
+      "example_id": "deduplicate_00304",
+      "input": "f g d c c b e",
+      "target": "f g d c b e"
+    },
+    {
+      "example_id": "deduplicate_01315",
+      "input": "b g h h c",
+      "target": "b g h c"
+    },
+    {
+      "example_id": "deduplicate_00506",
+      "input": "h b h c h b h",
+      "target": "h b c"
+    },
+    {
+      "example_id": "deduplicate_01224",
+      "input": "a c h g c h f f h b c",
+      "target": "a c h g f b"
+    },
+    {
+      "example_id": "deduplicate_01335",
+      "input": "c g c d f b c",
+      "target": "c g d f b"
+    },
+    {
+      "example_id": "deduplicate_00787",
+      "input": "a a f g c h",
+      "target": "a f g c h"
+    },
+    {
+      "example_id": "deduplicate_00085",
+      "input": "b b a e d a c c",
+      "target": "b a e d c"
+    },
+    {
+      "example_id": "deduplicate_01249",
+      "input": "d f a a b",
+      "target": "d f a b"
+    },
+    {
+      "example_id": "deduplicate_00627",
+      "input": "d a e b a d d a g",
+      "target": "d a e b g"
+    },
+    {
+      "example_id": "deduplicate_00654",
+      "input": "e d h c g c d h a a f",
+      "target": "e d h c g a f"
+    },
+    {
+      "example_id": "deduplicate_00916",
+      "input": "c a f g c f b h e",
+      "target": "c a f g b h e"
+    },
+    {
+      "example_id": "deduplicate_01154",
+      "input": "a a h f h a h d c",
+      "target": "a h f d c"
+    },
+    {
+      "example_id": "deduplicate_01323",
+      "input": "c g c e c g h e d b b b",
+      "target": "c g e h d b"
+    },
+    {
+      "example_id": "deduplicate_00019",
+      "input": "f f d b h c e c h b",
+      "target": "f d b h c e"
+    },
+    {
+      "example_id": "deduplicate_01183",
+      "input": "h e b e f f c h d",
+      "target": "h e b f c d"
+    },
+    {
+      "example_id": "deduplicate_00743",
+      "input": "c e f c c c g h h",
+      "target": "c e f g h"
+    },
+    {
+      "example_id": "deduplicate_01195",
+      "input": "h e g b b a b d",
+      "target": "h e g b a d"
+    },
+    {
+      "example_id": "deduplicate_00780",
+      "input": "d g d b d",
+      "target": "d g b"
+    },
+    {
+      "example_id": "deduplicate_00521",
+      "input": "d g f f g c d h e e",
+      "target": "d g f c h e"
+    },
+    {
+      "example_id": "deduplicate_00781",
+      "input": "c a g g e g e e",
+      "target": "c a g e"
+    },
+    {
+      "example_id": "deduplicate_00518",
+      "input": "e a e e a g f d a d",
+      "target": "e a g f d"
+    },
+    {
+      "example_id": "deduplicate_00460",
+      "input": "f b f b c b e h d b",
+      "target": "f b c e h d"
+    },
+    {
+      "example_id": "deduplicate_00089",
+      "input": "e f h e e a b",
+      "target": "e f h a b"
+    },
+    {
+      "example_id": "deduplicate_00049",
+      "input": "d f e f b d c e f b f c",
+      "target": "d f e b c"
+    },
+    {
+      "example_id": "deduplicate_01350",
+      "input": "e e g g f e h g e a",
+      "target": "e g f h a"
+    },
+    {
+      "example_id": "deduplicate_00350",
+      "input": "f d f g e g g g d",
+      "target": "f d g e"
+    },
+    {
+      "example_id": "deduplicate_00718",
+      "input": "h c g g e g h e g",
+      "target": "h c g e"
+    },
+    {
+      "example_id": "deduplicate_00830",
+      "input": "h f a b a e c",
+      "target": "h f a b e c"
+    },
+    {
+      "example_id": "deduplicate_00153",
+      "input": "g c f c a d",
+      "target": "g c f a d"
+    },
+    {
+      "example_id": "deduplicate_00129",
+      "input": "b g a f b d a f b g g",
+      "target": "b g a f d"
+    },
+    {
+      "example_id": "deduplicate_00184",
+      "input": "a f e h d g f e c h",
+      "target": "a f e h d g c"
+    },
+    {
+      "example_id": "deduplicate_00132",
+      "input": "a f c h f g d b f e a",
+      "target": "a f c h g d b e"
+    },
+    {
+      "example_id": "deduplicate_00601",
+      "input": "f c d g a f c d c d",
+      "target": "f c d g a"
+    },
+    {
+      "example_id": "deduplicate_00760",
+      "input": "h g d a g d e",
+      "target": "h g d a e"
+    },
+    {
+      "example_id": "deduplicate_00935",
+      "input": "e c b b e h g b f h b h",
+      "target": "e c b h g f"
+    },
+    {
+      "example_id": "deduplicate_00281",
+      "input": "a b g b b c a d",
+      "target": "a b g c d"
+    },
+    {
+      "example_id": "deduplicate_01051",
+      "input": "b h h b g f",
+      "target": "b h g f"
+    },
+    {
+      "example_id": "deduplicate_01053",
+      "input": "e a e d g b f",
+      "target": "e a d g b f"
+    },
+    {
+      "example_id": "deduplicate_00453",
+      "input": "f g f c c",
+      "target": "f g c"
+    },
+    {
+      "example_id": "deduplicate_00955",
+      "input": "d g e d h g e e c a",
+      "target": "d g e h c a"
+    },
+    {
+      "example_id": "deduplicate_00539",
+      "input": "e f e f g c b",
+      "target": "e f g c b"
+    },
+    {
+      "example_id": "deduplicate_01395",
+      "input": "a g h h f h a b e",
+      "target": "a g h f b e"
+    },
+    {
+      "example_id": "deduplicate_00714",
+      "input": "h g h f e c",
+      "target": "h g f e c"
+    },
+    {
+      "example_id": "deduplicate_00058",
+      "input": "e d b f h d c f b f d",
+      "target": "e d b f h c"
+    },
+    {
+      "example_id": "deduplicate_00737",
+      "input": "a b g h e e f",
+      "target": "a b g h e f"
+    },
+    {
+      "example_id": "deduplicate_01255",
+      "input": "e b d b b",
+      "target": "e b d"
+    },
+    {
+      "example_id": "deduplicate_00292",
+      "input": "a b d d g f",
+      "target": "a b d g f"
+    },
+    {
+      "example_id": "deduplicate_00428",
+      "input": "c h b g e c f a h h g h",
+      "target": "c h b g e f a"
+    },
+    {
+      "example_id": "deduplicate_01092",
+      "input": "c h c g c b f c d e b",
+      "target": "c h g b f d e"
+    },
+    {
+      "example_id": "deduplicate_00526",
+      "input": "f h c f d c c",
+      "target": "f h c d"
+    },
+    {
+      "example_id": "deduplicate_00540",
+      "input": "c f b b c e h a f g c",
+      "target": "c f b e h a g"
+    },
+    {
+      "example_id": "deduplicate_00982",
+      "input": "f b f g h d g",
+      "target": "f b g h d"
+    },
+    {
+      "example_id": "deduplicate_01065",
+      "input": "c b b c a",
+      "target": "c b a"
+    },
+    {
+      "example_id": "deduplicate_01157",
+      "input": "a f a e e d e f c c g",
+      "target": "a f e d c g"
+    },
+    {
+      "example_id": "deduplicate_01345",
+      "input": "d f h e g b g h",
+      "target": "d f h e g b"
+    },
+    {
+      "example_id": "deduplicate_00680",
+      "input": "d h c e e c f e e h b a",
+      "target": "d h c e f b a"
+    },
+    {
+      "example_id": "deduplicate_00272",
+      "input": "g c b c d f b f f",
+      "target": "g c b d f"
+    },
+    {
+      "example_id": "deduplicate_00668",
+      "input": "a e b e e",
+      "target": "a e b"
+    },
+    {
+      "example_id": "deduplicate_00693",
+      "input": "h f c b c h d c",
+      "target": "h f c b d"
+    },
+    {
+      "example_id": "deduplicate_00419",
+      "input": "e g d a a b b f b h",
+      "target": "e g d a b f h"
+    },
+    {
+      "example_id": "deduplicate_00256",
+      "input": "b b d e d h g h b b g",
+      "target": "b d e h g"
+    },
+    {
+      "example_id": "deduplicate_00181",
+      "input": "d g e c e f e e a h a e",
+      "target": "d g e c f a h"
+    },
+    {
+      "example_id": "deduplicate_00162",
+      "input": "d a c g f d c b c b e d",
+      "target": "d a c g f b e"
+    },
+    {
+      "example_id": "deduplicate_00051",
+      "input": "h h e b f h",
+      "target": "h e b f"
+    },
+    {
+      "example_id": "deduplicate_00931",
+      "input": "b c d e d a b c e d a",
+      "target": "b c d e a"
+    },
+    {
+      "example_id": "deduplicate_00665",
+      "input": "f f b g f d h a e",
+      "target": "f b g d h a e"
+    },
+    {
+      "example_id": "deduplicate_01078",
+      "input": "b d c d g a e h g b b",
+      "target": "b d c g a e h"
+    },
+    {
+      "example_id": "deduplicate_00768",
+      "input": "e d a h b a g g g a a",
+      "target": "e d a h b g"
+    },
+    {
+      "example_id": "deduplicate_00568",
+      "input": "e f b b b d",
+      "target": "e f b d"
+    },
+    {
+      "example_id": "deduplicate_00740",
+      "input": "g e e g d",
+      "target": "g e d"
+    },
+    {
+      "example_id": "deduplicate_00140",
+      "input": "h c h b h d",
+      "target": "h c b d"
+    }
+  ]
+}

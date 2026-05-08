@@ -1,0 +1,649 @@
+{
+  "task": "linguistic",
+  "category": "lexical",
+  "split": "test",
+  "seed": 0,
+  "n_records": 128,
+  "records": [
+    {
+      "example_id": "linguistic_0059",
+      "input": "foot",
+      "target": "feet"
+    },
+    {
+      "example_id": "linguistic_0029",
+      "input": "cherub",
+      "target": "cherubim"
+    },
+    {
+      "example_id": "linguistic_0081",
+      "input": "larva",
+      "target": "larvae"
+    },
+    {
+      "example_id": "linguistic_0148",
+      "input": "synthesis",
+      "target": "syntheses"
+    },
+    {
+      "example_id": "linguistic_0152",
+      "input": "thesis",
+      "target": "theses"
+    },
+    {
+      "example_id": "linguistic_0061",
+      "input": "fungus",
+      "target": "fungi"
+    },
+    {
+      "example_id": "linguistic_0048",
+      "input": "elf",
+      "target": "elves"
+    },
+    {
+      "example_id": "linguistic_0044",
+      "input": "diagnosis",
+      "target": "diagnoses"
+    },
+    {
+      "example_id": "linguistic_0099",
+      "input": "mouse",
+      "target": "mice"
+    },
+    {
+      "example_id": "linguistic_0123",
+      "input": "quiz",
+      "target": "quizzes"
+    },
+    {
+      "example_id": "linguistic_0144",
+      "input": "syconium",
+      "target": "syconia"
+    },
+    {
+      "example_id": "linguistic_0087",
+      "input": "locus",
+      "target": "loci"
+    },
+    {
+      "example_id": "linguistic_0163",
+      "input": "vertebra",
+      "target": "vertebrae"
+    },
+    {
+      "example_id": "linguistic_0074",
+      "input": "hypothesis",
+      "target": "hypotheses"
+    },
+    {
+      "example_id": "linguistic_0071",
+      "input": "hippopotamus",
+      "target": "hippopotami"
+    },
+    {
+      "example_id": "linguistic_0110",
+      "input": "opus",
+      "target": "opera"
+    },
+    {
+      "example_id": "linguistic_0051",
+      "input": "embargo",
+      "target": "embargoes"
+    },
+    {
+      "example_id": "linguistic_0146",
+      "input": "symposium",
+      "target": "symposia"
+    },
+    {
+      "example_id": "linguistic_0022",
+      "input": "bureau",
+      "target": "bureaus"
+    },
+    {
+      "example_id": "linguistic_0068",
+      "input": "half",
+      "target": "halves"
+    },
+    {
+      "example_id": "linguistic_0043",
+      "input": "deer",
+      "target": "deer"
+    },
+    {
+      "example_id": "linguistic_0005",
+      "input": "alveolus",
+      "target": "alveoli"
+    },
+    {
+      "example_id": "linguistic_0041",
+      "input": "cystoma",
+      "target": "cystomata"
+    },
+    {
+      "example_id": "linguistic_0132",
+      "input": "sheep",
+      "target": "sheep"
+    },
+    {
+      "example_id": "linguistic_0162",
+      "input": "uterus",
+      "target": "uteri"
+    },
+    {
+      "example_id": "linguistic_0058",
+      "input": "focus",
+      "target": "foci"
+    },
+    {
+      "example_id": "linguistic_0166",
+      "input": "vita",
+      "target": "vitae"
+    },
+    {
+      "example_id": "linguistic_0101",
+      "input": "nemesis",
+      "target": "nemeses"
+    },
+    {
+      "example_id": "linguistic_0147",
+      "input": "synopsis",
+      "target": "synopses"
+    },
+    {
+      "example_id": "linguistic_0109",
+      "input": "omphalos",
+      "target": "omphaloi"
+    },
+    {
+      "example_id": "linguistic_0032",
+      "input": "cloaca",
+      "target": "cloacae"
+    },
+    {
+      "example_id": "linguistic_0128",
+      "input": "scrotum",
+      "target": "scrota"
+    },
+    {
+      "example_id": "linguistic_0161",
+      "input": "umbilicus",
+      "target": "umbilici"
+    },
+    {
+      "example_id": "linguistic_0093",
+      "input": "media",
+      "target": "media"
+    },
+    {
+      "example_id": "linguistic_0142",
+      "input": "stratum",
+      "target": "strata"
+    },
+    {
+      "example_id": "linguistic_0100",
+      "input": "nebula",
+      "target": "nebulae"
+    },
+    {
+      "example_id": "linguistic_0034",
+      "input": "codex",
+      "target": "codices"
+    },
+    {
+      "example_id": "linguistic_0097",
+      "input": "minutia",
+      "target": "minutiae"
+    },
+    {
+      "example_id": "linguistic_0002",
+      "input": "alga",
+      "target": "algae"
+    },
+    {
+      "example_id": "linguistic_0047",
+      "input": "echo",
+      "target": "echoes"
+    },
+    {
+      "example_id": "linguistic_0009",
+      "input": "antithesis",
+      "target": "antitheses"
+    },
+    {
+      "example_id": "linguistic_0006",
+      "input": "amoeba",
+      "target": "amoebae"
+    },
+    {
+      "example_id": "linguistic_0135",
+      "input": "simulacrum",
+      "target": "simulacra"
+    },
+    {
+      "example_id": "linguistic_0172",
+      "input": "woman",
+      "target": "women"
+    },
+    {
+      "example_id": "linguistic_0096",
+      "input": "millennium",
+      "target": "millennia"
+    },
+    {
+      "example_id": "linguistic_0139",
+      "input": "spectrum",
+      "target": "spectra"
+    },
+    {
+      "example_id": "linguistic_0086",
+      "input": "loculus",
+      "target": "loculi"
+    },
+    {
+      "example_id": "linguistic_0014",
+      "input": "bacillus",
+      "target": "bacilli"
+    },
+    {
+      "example_id": "linguistic_0155",
+      "input": "thrombus",
+      "target": "thrombi"
+    },
+    {
+      "example_id": "linguistic_0082",
+      "input": "leaf",
+      "target": "leaves"
+    },
+    {
+      "example_id": "linguistic_0017",
+      "input": "barracks",
+      "target": "barracks"
+    },
+    {
+      "example_id": "linguistic_0046",
+      "input": "dwarf",
+      "target": "dwarfs"
+    },
+    {
+      "example_id": "linguistic_0001",
+      "input": "aircraft",
+      "target": "aircraft"
+    },
+    {
+      "example_id": "linguistic_0105",
+      "input": "nucleus",
+      "target": "nuclei"
+    },
+    {
+      "example_id": "linguistic_0012",
+      "input": "automaton",
+      "target": "automata"
+    },
+    {
+      "example_id": "linguistic_0054",
+      "input": "faux pas",
+      "target": "faux pas"
+    },
+    {
+      "example_id": "linguistic_0021",
+      "input": "buffalo",
+      "target": "buffalo"
+    },
+    {
+      "example_id": "linguistic_0092",
+      "input": "measles",
+      "target": "measles"
+    },
+    {
+      "example_id": "linguistic_0089",
+      "input": "man",
+      "target": "men"
+    },
+    {
+      "example_id": "linguistic_0031",
+      "input": "ch\u00e2teau",
+      "target": "ch\u00e2teaus"
+    },
+    {
+      "example_id": "linguistic_0007",
+      "input": "analysis",
+      "target": "analyses"
+    },
+    {
+      "example_id": "linguistic_0039",
+      "input": "criterion",
+      "target": "criteria"
+    },
+    {
+      "example_id": "linguistic_0020",
+      "input": "bison",
+      "target": "bison"
+    },
+    {
+      "example_id": "linguistic_0094",
+      "input": "medium",
+      "target": "media"
+    },
+    {
+      "example_id": "linguistic_0045",
+      "input": "die",
+      "target": "dice"
+    },
+    {
+      "example_id": "linguistic_0063",
+      "input": "genus",
+      "target": "genera"
+    },
+    {
+      "example_id": "linguistic_0125",
+      "input": "referendum",
+      "target": "referenda"
+    },
+    {
+      "example_id": "linguistic_0167",
+      "input": "vortex",
+      "target": "vortices"
+    },
+    {
+      "example_id": "linguistic_0053",
+      "input": "erratum",
+      "target": "errata"
+    },
+    {
+      "example_id": "linguistic_0027",
+      "input": "census",
+      "target": "censuses"
+    },
+    {
+      "example_id": "linguistic_0106",
+      "input": "oasis",
+      "target": "oases"
+    },
+    {
+      "example_id": "linguistic_0137",
+      "input": "spacecraft",
+      "target": "spacecraft"
+    },
+    {
+      "example_id": "linguistic_0157",
+      "input": "tooth",
+      "target": "teeth"
+    },
+    {
+      "example_id": "linguistic_0067",
+      "input": "grouse",
+      "target": "grouse"
+    },
+    {
+      "example_id": "linguistic_0050",
+      "input": "ellipsis",
+      "target": "ellipses"
+    },
+    {
+      "example_id": "linguistic_0119",
+      "input": "polyhedron",
+      "target": "polyhedra"
+    },
+    {
+      "example_id": "linguistic_0115",
+      "input": "person",
+      "target": "people"
+    },
+    {
+      "example_id": "linguistic_0168",
+      "input": "watercraft",
+      "target": "watercraft"
+    },
+    {
+      "example_id": "linguistic_0019",
+      "input": "beau",
+      "target": "beaux"
+    },
+    {
+      "example_id": "linguistic_0127",
+      "input": "scarf",
+      "target": "scarves"
+    },
+    {
+      "example_id": "linguistic_0095",
+      "input": "memorandum",
+      "target": "memoranda"
+    },
+    {
+      "example_id": "linguistic_0008",
+      "input": "antenna",
+      "target": "antennae"
+    },
+    {
+      "example_id": "linguistic_0060",
+      "input": "formula",
+      "target": "formulae"
+    },
+    {
+      "example_id": "linguistic_0033",
+      "input": "cod",
+      "target": "cod"
+    },
+    {
+      "example_id": "linguistic_0078",
+      "input": "interstitium",
+      "target": "interstitia"
+    },
+    {
+      "example_id": "linguistic_0004",
+      "input": "alumnus",
+      "target": "alumni"
+    },
+    {
+      "example_id": "linguistic_0088",
+      "input": "louse",
+      "target": "lice"
+    },
+    {
+      "example_id": "linguistic_0131",
+      "input": "series",
+      "target": "series"
+    },
+    {
+      "example_id": "linguistic_0134",
+      "input": "shrimp",
+      "target": "shrimp"
+    },
+    {
+      "example_id": "linguistic_0171",
+      "input": "wolf",
+      "target": "wolves"
+    },
+    {
+      "example_id": "linguistic_0140",
+      "input": "squid",
+      "target": "squid"
+    },
+    {
+      "example_id": "linguistic_0073",
+      "input": "hovercraft",
+      "target": "hovercraft"
+    },
+    {
+      "example_id": "linguistic_0114",
+      "input": "parenthesis",
+      "target": "parentheses"
+    },
+    {
+      "example_id": "linguistic_0049",
+      "input": "elk",
+      "target": "elk"
+    },
+    {
+      "example_id": "linguistic_0076",
+      "input": "incubus",
+      "target": "incubi"
+    },
+    {
+      "example_id": "linguistic_0116",
+      "input": "phenomenon",
+      "target": "phenomena"
+    },
+    {
+      "example_id": "linguistic_0056",
+      "input": "firmware",
+      "target": "firmware"
+    },
+    {
+      "example_id": "linguistic_0036",
+      "input": "consortium",
+      "target": "consortia"
+    },
+    {
+      "example_id": "linguistic_0075",
+      "input": "iliac",
+      "target": "ilia"
+    },
+    {
+      "example_id": "linguistic_0104",
+      "input": "nucleolus",
+      "target": "nucleoli"
+    },
+    {
+      "example_id": "linguistic_0165",
+      "input": "veto",
+      "target": "vetoes"
+    },
+    {
+      "example_id": "linguistic_0026",
+      "input": "carp",
+      "target": "carp"
+    },
+    {
+      "example_id": "linguistic_0118",
+      "input": "pike",
+      "target": "pike"
+    },
+    {
+      "example_id": "linguistic_0042",
+      "input": "datum",
+      "target": "data"
+    },
+    {
+      "example_id": "linguistic_0108",
+      "input": "offspring",
+      "target": "offspring"
+    },
+    {
+      "example_id": "linguistic_0154",
+      "input": "this",
+      "target": "these"
+    },
+    {
+      "example_id": "linguistic_0145",
+      "input": "syllabus",
+      "target": "syllabi"
+    },
+    {
+      "example_id": "linguistic_0153",
+      "input": "thief",
+      "target": "thieves"
+    },
+    {
+      "example_id": "linguistic_0070",
+      "input": "hero",
+      "target": "heroes"
+    },
+    {
+      "example_id": "linguistic_0038",
+      "input": "crisis",
+      "target": "crises"
+    },
+    {
+      "example_id": "linguistic_0013",
+      "input": "axis",
+      "target": "axes"
+    },
+    {
+      "example_id": "linguistic_0160",
+      "input": "tuna",
+      "target": "tuna"
+    },
+    {
+      "example_id": "linguistic_0065",
+      "input": "goose",
+      "target": "geese"
+    },
+    {
+      "example_id": "linguistic_0112",
+      "input": "ox",
+      "target": "oxen"
+    },
+    {
+      "example_id": "linguistic_0040",
+      "input": "curriculum",
+      "target": "curricula"
+    },
+    {
+      "example_id": "linguistic_0170",
+      "input": "wife",
+      "target": "wives"
+    },
+    {
+      "example_id": "linguistic_0011",
+      "input": "appendix",
+      "target": "appendices"
+    },
+    {
+      "example_id": "linguistic_0057",
+      "input": "fish",
+      "target": "fish"
+    },
+    {
+      "example_id": "linguistic_0069",
+      "input": "hamulus",
+      "target": "hamuli"
+    },
+    {
+      "example_id": "linguistic_0121",
+      "input": "primus",
+      "target": "primi"
+    },
+    {
+      "example_id": "linguistic_0150",
+      "input": "testis",
+      "target": "testes"
+    },
+    {
+      "example_id": "linguistic_0138",
+      "input": "species",
+      "target": "species"
+    },
+    {
+      "example_id": "linguistic_0030",
+      "input": "child",
+      "target": "children"
+    },
+    {
+      "example_id": "linguistic_0028",
+      "input": "chassis",
+      "target": "chassis"
+    },
+    {
+      "example_id": "linguistic_0158",
+      "input": "torus",
+      "target": "tori"
+    },
+    {
+      "example_id": "linguistic_0117",
+      "input": "phylum",
+      "target": "phyla"
+    },
+    {
+      "example_id": "linguistic_0156",
+      "input": "tomato",
+      "target": "tomatoes"
+    },
+    {
+      "example_id": "linguistic_0016",
+      "input": "baculum",
+      "target": "bacula"
+    }
+  ]
+}

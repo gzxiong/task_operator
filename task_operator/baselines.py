@@ -43,7 +43,7 @@ import torch
 from .generation import generate_with_hooks
 from .model import get_decoder_layers, get_text_config
 from .prompting import DEMO_TEMPLATE, QUERY_TEMPLATE, build_full_icl_prompt, build_zsl_prompt
-from .search import _pad_and_stack, _per_sample_nll_from_logits, prepare_sample
+from .nll_utils import pad_and_stack, per_sample_nll_from_logits, prepare_sample
 from .tokenization import encode_prompt_ids
 
 
@@ -93,19 +93,6 @@ class ConceptorConfig(_BaselineCommon):
     layer_step: int = 1
     aperture: float = 1.0
     scaling_beta: float = 1.0
-
-
-@dataclass
-class I2CLConfig(_BaselineCommon):
-    """I2CL (Liu et al. NeurIPS 2024, arXiv:2405.14660v2). Defaults from the paper."""
-
-    n_steps: int = 200
-    lr: float = 1e-2            # paper §3.2: AdamW with cosine annealing 1e-2 -> lr_min
-    lr_min: float = 1e-5        # paper §3.2: cosine annealing end LR
-    init_lambda: float = 0.1
-    init_beta: float = 1.0
-    noise_gamma: float = 0.001  # paper §3.2: empirically τ=0.001
-    calibration_seed: int = 0
 
 
 # ============================================================================
@@ -267,7 +254,7 @@ def _eval_batched_nll(
     for bs in range(0, n, batch_size):
         batch = samples[bs : bs + batch_size]
         extended = [torch.cat([s["zsl_ids"], s["target_ids"]], dim=1) for s in batch]
-        input_ids, attn_mask = _pad_and_stack(extended, pad_id, device)
+        input_ids, attn_mask = pad_and_stack(extended, pad_id, device)
         per_sample_pos = torch.tensor(
             [int(s["zsl_prompt_len"]) - 1 for s in batch],
             dtype=torch.long, device=device,
@@ -282,7 +269,7 @@ def _eval_batched_nll(
             prompt_lens = [s["zsl_prompt_len"] for s in batch]
             target_padded = [s["target_ids"][0] for s in batch]
             target_lens = [s["n_target"] for s in batch]
-            batch_nlls = _per_sample_nll_from_logits(out.logits, prompt_lens, target_padded, target_lens)
+            batch_nlls = per_sample_nll_from_logits(out.logits, prompt_lens, target_padded, target_lens)
         finally:
             _clear_hooks(handles)
         nlls.extend(batch_nlls)
@@ -346,7 +333,7 @@ def _capture_residual_last_per_layer(model, tokenizer, samples, batch_size):
     for bs in range(0, len(samples), batch_size):
         batch = samples[bs : bs + batch_size]
         icl_ids_list = [s["icl_ids"] for s in batch]
-        input_ids, attn_mask = _pad_and_stack(icl_ids_list, pad_id, device)
+        input_ids, attn_mask = pad_and_stack(icl_ids_list, pad_id, device)
         per_sample_pos = [int(s["icl_ids"].shape[1]) - 1 for s in batch]
         with torch.inference_mode():
             out = model(
@@ -458,7 +445,7 @@ def _capture_per_head_clean_means(model, tokenizer, samples, batch_size):
     for bs in range(0, len(samples), batch_size):
         batch = samples[bs : bs + batch_size]
         icl_ids_list = [s["icl_ids"] for s in batch]
-        input_ids, attn_mask = _pad_and_stack(icl_ids_list, pad_id, device)
+        input_ids, attn_mask = pad_and_stack(icl_ids_list, pad_id, device)
         per_sample_pos = torch.tensor(
             [int(s["icl_ids"].shape[1]) - 1 for s in batch],
             dtype=torch.long, device=device,
@@ -806,7 +793,7 @@ def conceptor_extract(model, tokenizer, demos, validation_records, validation_ic
     for bs in range(0, len(samples), config.batch_size):
         batch = samples[bs : bs + config.batch_size]
         icl_ids_list = [s["icl_ids"] for s in batch]
-        input_ids, attn_mask = _pad_and_stack(icl_ids_list, pad_id, device)
+        input_ids, attn_mask = pad_and_stack(icl_ids_list, pad_id, device)
         per_sample_pos = [int(s["icl_ids"].shape[1]) - 1 for s in batch]
         with torch.inference_mode():
             out = model(
@@ -897,282 +884,6 @@ def conceptor_apply(model, tokenizer, test_record, repr_dict: dict, config: Conc
     return payload
 
 
-# ============================================================================
-# I2CL (Liu et al. NeurIPS 2024)
-# ============================================================================
-# Vectorize each demo individually (per-layer attention output and MLP output at
-# the last token), aggregate cross-demo means, then calibrate 4·L scalars
-# (λ^a, β^a, λ^m, β^m) by Adam on teacher-forced demo-label NLL. At apply time
-# the same scalars blend the captured means with the query's natural module
-# outputs at every layer × every position.
-
-def _make_i2cl_blend_capture_hook(captured: dict, key: str):
-    """Capture last-position output of a module on a B=1 forward (used during
-    extraction). Stored on GPU."""
-
-    def hook(module, inputs, output):
-        h = output[0] if isinstance(output, tuple) else output
-        captured[key] = h[0, -1, :].detach()
-        return output
-    return hook
-
-
-def _make_i2cl_blend_hook_param(v: torch.Tensor, lam: torch.Tensor, beta: torch.Tensor):
-    """Forward post-hook: out_new = lam * v + beta * out, broadcast over (B, T, d).
-
-    `lam` and `beta` are torch tensors so the hook participates in the autograd
-    graph during calibration. At apply time these are passed as plain tensors
-    (no grad) and the math is identical."""
-
-    def hook(module, inputs, output):
-        h = output[0] if isinstance(output, tuple) else output
-        v_dev = v.to(h.device, h.dtype)
-        l_dev = lam.to(h.device, h.dtype)
-        b_dev = beta.to(h.device, h.dtype)
-        h_new = l_dev * v_dev + b_dev * h
-        if isinstance(output, tuple):
-            return (h_new, *output[1:])
-        return h_new
-    return hook
-
-
-def _make_i2cl_noise_hook(gamma: float):
-    """Calibration-only hook on a decoder layer's residual-stream output. Adds
-    Gaussian noise `gamma * ||o||_2 * eta` per token, η ~ N(0, I)."""
-
-    def hook(module, inputs, output):
-        h = output[0] if isinstance(output, tuple) else output
-        norm = h.norm(dim=-1, keepdim=True).clamp_min(1e-8)
-        eta = torch.randn_like(h)
-        h_new = h + float(gamma) * norm * eta
-        if isinstance(output, tuple):
-            return (h_new, *output[1:])
-        return h_new
-    return hook
-
-
-def _i2cl_capture_demo_means(model, tokenizer, demos, config: I2CLConfig):
-    """Run K single-demo forwards; return (a_mean, m_mean) of shape (L, hidden)
-    on the model's device.
-
-    Paper-faithful capture: the position is the last token of the FULL demo
-    `Input: x \\nOutput: y` (after stripping trailing whitespace) — i.e., the
-    position immediately *after* the model has produced the answer.
-    """
-
-    device = next(model.parameters()).device
-    text_cfg = get_text_config(model)
-    n_layers = int(text_cfg.num_hidden_layers)
-    hidden = int(text_cfg.hidden_size)
-    decoder_layers = get_decoder_layers(model)
-
-    demos_K = list(demos)
-    if not demos_K:
-        raise RuntimeError("I2CL extract: empty demo list")
-
-    a_sum = torch.zeros(n_layers, hidden, dtype=torch.float32, device=device)
-    m_sum = torch.zeros(n_layers, hidden, dtype=torch.float32, device=device)
-    n_used = 0
-    for d in demos_K:
-        x_i = d.get("input")
-        y_i = d.get("output") or d.get("target")
-        if not x_i or not y_i:
-            continue
-        prompt = config.demo_template.format(input=x_i, output=y_i).strip()
-        ids = encode_prompt_ids(tokenizer, prompt, attention_sink=config.attention_sink, device=device)
-
-        captured: dict = {}
-        handles = []
-        for ell, layer in enumerate(decoder_layers):
-            handles.append(layer.self_attn.o_proj.register_forward_hook(
-                _make_i2cl_blend_capture_hook(captured, ("a", ell))
-            ))
-            handles.append(layer.mlp.register_forward_hook(
-                _make_i2cl_blend_capture_hook(captured, ("m", ell))
-            ))
-        try:
-            with torch.inference_mode():
-                model(input_ids=ids, use_cache=False, return_dict=True)
-        finally:
-            _clear_hooks(handles)
-
-        for ell in range(n_layers):
-            a_sum[ell] += captured[("a", ell)].float()
-            m_sum[ell] += captured[("m", ell)].float()
-        n_used += 1
-
-    if n_used == 0:
-        raise RuntimeError("I2CL extract: no usable demos")
-    a_mean = a_sum / n_used
-    m_mean = m_sum / n_used
-    return a_mean, m_mean
-
-
-def _i2cl_calibrate(
-    model, tokenizer, demos, a_mean, m_mean, config: I2CLConfig,
-):
-    """Adam on the 4·L scalars by minimising teacher-forced NLL of demo labels."""
-
-    device = next(model.parameters()).device
-    model_dtype = next(model.parameters()).dtype
-    text_cfg = get_text_config(model)
-    n_layers = int(text_cfg.num_hidden_layers)
-    decoder_layers = get_decoder_layers(model)
-
-    # Build per-demo (prompt_ids, target_ids) pairs. Target tokens are derived
-    # from the natural tokenization of y *as it appears in the demo* (i.e., the
-    # full demo's tokens minus the prefix's tokens) rather than from `tokenizer(y)`
-    # standalone — this avoids the leading-space token mismatch that arises when y
-    # is tokenized without surrounding context.
-    samples: list[tuple[torch.Tensor, torch.Tensor]] = []
-    for d in demos:
-        x_i = d.get("input")
-        y_i = d.get("output") or d.get("target")
-        if not x_i or not y_i:
-            continue
-        prompt = build_zsl_prompt(x_i, query_template=config.query_template)
-        prompt_ids = encode_prompt_ids(tokenizer, prompt, attention_sink=config.attention_sink, device=device)
-        full_demo_text = config.demo_template.format(input=x_i, output=y_i).strip()
-        full_ids = encode_prompt_ids(tokenizer, full_demo_text, attention_sink=config.attention_sink, device=device)
-        prefix_len = int(prompt_ids.shape[1])
-        if int(full_ids.shape[1]) <= prefix_len:
-            continue
-        target_ids = full_ids[:, prefix_len:]
-        samples.append((prompt_ids, target_ids))
-    if not samples:
-        raise RuntimeError("I2CL calibration: no usable demos")
-
-    # Freeze model weights but allow activations to carry grad to our scalars.
-    model.eval()
-    prev_requires_grad = {}
-    for n, p in model.named_parameters():
-        prev_requires_grad[n] = p.requires_grad
-        p.requires_grad_(False)
-
-    try:
-        # 4 vectors of L scalars each, on device, in float32 for stable optim.
-        la = torch.full((n_layers,), float(config.init_lambda), device=device, dtype=torch.float32, requires_grad=True)
-        ba = torch.full((n_layers,), float(config.init_beta),   device=device, dtype=torch.float32, requires_grad=True)
-        lm = torch.full((n_layers,), float(config.init_lambda), device=device, dtype=torch.float32, requires_grad=True)
-        bm = torch.full((n_layers,), float(config.init_beta),   device=device, dtype=torch.float32, requires_grad=True)
-        opt = torch.optim.AdamW([la, ba, lm, bm], lr=float(config.lr))
-        sched = torch.optim.lr_scheduler.CosineAnnealingLR(
-            opt, T_max=int(config.n_steps), eta_min=float(config.lr_min),
-        )
-
-        gen = torch.Generator(device="cpu").manual_seed(int(config.calibration_seed))
-        loss_trace: list[float] = []
-
-        for step in range(int(config.n_steps)):
-            # Round-robin through demos with periodic shuffle.
-            if step % len(samples) == 0:
-                perm = torch.randperm(len(samples), generator=gen).tolist()
-            i = perm[step % len(samples)]
-            prompt_ids, target_ids = samples[i]
-            extended = torch.cat([prompt_ids, target_ids], dim=1)
-
-            # Register hooks: blend on each o_proj + each mlp; noise on each layer output.
-            handles = []
-            for ell, layer in enumerate(decoder_layers):
-                handles.append(layer.self_attn.o_proj.register_forward_hook(
-                    _make_i2cl_blend_hook_param(a_mean[ell], la[ell], ba[ell])
-                ))
-                handles.append(layer.mlp.register_forward_hook(
-                    _make_i2cl_blend_hook_param(m_mean[ell], lm[ell], bm[ell])
-                ))
-                if float(config.noise_gamma) > 0:
-                    handles.append(layer.register_forward_hook(_make_i2cl_noise_hook(config.noise_gamma)))
-
-            try:
-                opt.zero_grad(set_to_none=True)
-                # Need grads — do NOT use inference_mode.
-                out = model(input_ids=extended, use_cache=False, return_dict=True)
-                # Teacher-forced NLL of target tokens.
-                logits = out.logits[0]                 # (T_total, V)
-                prompt_len = int(prompt_ids.shape[1])
-                n_target = int(target_ids.shape[1])
-                slice_logits = logits[prompt_len - 1 : prompt_len - 1 + n_target, :].float()
-                log_probs = torch.nn.functional.log_softmax(slice_logits, dim=-1)
-                tgt = target_ids[0]
-                loss = -log_probs.gather(1, tgt.unsqueeze(-1)).squeeze(-1).mean()
-                loss.backward()
-                opt.step()
-                sched.step()
-                loss_trace.append(float(loss.item()))
-            finally:
-                _clear_hooks(handles)
-                del out
-
-        return la.detach(), ba.detach(), lm.detach(), bm.detach(), loss_trace
-    finally:
-        for n, p in model.named_parameters():
-            p.requires_grad_(prev_requires_grad.get(n, False))
-
-
-def i2cl_extract(model, tokenizer, demos, validation_records, validation_icl_outputs, config: I2CLConfig) -> dict:
-    """Vectorize K demos into (a_mean, m_mean), then calibrate 4·L blend scalars
-    on the same demos. `validation_records` / `validation_icl_outputs` are accepted
-    for dispatcher signature compatibility but unused — paper-faithful I2CL trains
-    on the demo set only.
-    """
-
-    text_cfg = get_text_config(model)
-    n_layers = int(text_cfg.num_hidden_layers)
-    hidden = int(text_cfg.hidden_size)
-
-    a_mean, m_mean = _i2cl_capture_demo_means(model, tokenizer, demos, config)
-    la, ba, lm, bm, loss_trace = _i2cl_calibrate(model, tokenizer, demos, a_mean, m_mean, config)
-
-    return {
-        "a_mean":     a_mean.detach().cpu(),
-        "m_mean":     m_mean.detach().cpu(),
-        "lambdas_a":  la.cpu(),
-        "betas_a":    ba.cpu(),
-        "lambdas_m":  lm.cpu(),
-        "betas_m":    bm.cpu(),
-        "loss_trace": loss_trace,
-        "n_layers":   int(n_layers),
-        "hidden_size": int(hidden),
-        "n_demos":    int(len(demos)),
-    }
-
-
-def i2cl_apply(model, tokenizer, test_record, repr_dict: dict, config: I2CLConfig) -> dict:
-    decoder_layers = get_decoder_layers(model)
-    a_mean = repr_dict["a_mean"]
-    m_mean = repr_dict["m_mean"]
-    la = repr_dict["lambdas_a"]
-    ba = repr_dict["betas_a"]
-    lm = repr_dict["lambdas_m"]
-    bm = repr_dict["betas_m"]
-
-    handles = []
-    for ell, layer in enumerate(decoder_layers):
-        handles.append(layer.self_attn.o_proj.register_forward_hook(
-            _make_i2cl_blend_hook_param(a_mean[ell], la[ell], ba[ell])
-        ))
-        handles.append(layer.mlp.register_forward_hook(
-            _make_i2cl_blend_hook_param(m_mean[ell], lm[ell], bm[ell])
-        ))
-    try:
-        zsl_prompt = build_zsl_prompt(test_record["input"], query_template=config.query_template)
-        payload = generate_with_hooks(
-            model, tokenizer, zsl_prompt,
-            prompt_records=None, gen_records=None,
-            attention_sink=config.attention_sink,
-            max_new_tokens=config.max_new_tokens,
-            stop_strings=config.stopping_strings,
-            answer_phrases=config.answer_phrases,
-            repetition_penalty=config.repetition_penalty,
-            do_sample=config.do_sample,
-            temperature=config.temperature,
-            top_p=config.top_p,
-            top_k=config.top_k,
-        )
-    finally:
-        _clear_hooks(handles)
-    return payload
-
 
 # ============================================================================
 # Dispatcher
@@ -1183,14 +894,12 @@ _EXTRACT = {
     "FV": fv_extract,
     "ICV": icv_extract,
     "Conceptor": conceptor_extract,
-    "I2CL": i2cl_extract,
 }
 _APPLY = {
     "TV": tv_apply,
     "FV": fv_apply,
     "ICV": icv_apply,
     "Conceptor": conceptor_apply,
-    "I2CL": i2cl_apply,
 }
 
 

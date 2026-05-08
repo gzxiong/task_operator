@@ -1,0 +1,74 @@
+{
+  "task": "linguistic",
+  "category": "lexical",
+  "split": "demos",
+  "seed": 0,
+  "n_records": 13,
+  "records": [
+    {
+      "example_id": "linguistic_0015",
+      "input": "bacterium",
+      "target": "bacteria"
+    },
+    {
+      "example_id": "linguistic_0130",
+      "input": "seminoma",
+      "target": "seminomata"
+    },
+    {
+      "example_id": "linguistic_0141",
+      "input": "stimulus",
+      "target": "stimuli"
+    },
+    {
+      "example_id": "linguistic_0018",
+      "input": "basis",
+      "target": "bases"
+    },
+    {
+      "example_id": "linguistic_0072",
+      "input": "hoof",
+      "target": "hooves"
+    },
+    {
+      "example_id": "linguistic_0143",
+      "input": "swine",
+      "target": "swine"
+    },
+    {
+      "example_id": "linguistic_0037",
+      "input": "corpus",
+      "target": "corpora"
+    },
+    {
+      "example_id": "linguistic_0035",
+      "input": "concerto",
+      "target": "concerti"
+    },
+    {
+      "example_id": "linguistic_0129",
+      "input": "self",
+      "target": "selves"
+    },
+    {
+      "example_id": "linguistic_0111",
+      "input": "ovum",
+      "target": "ova"
+    },
+    {
+      "example_id": "linguistic_0085",
+      "input": "loaf",
+      "target": "loaves"
+    },
+    {
+      "example_id": "linguistic_0136",
+      "input": "soliloquy",
+      "target": "soliloquies"
+    },
+    {
+      "example_id": "linguistic_0079",
+      "input": "kakapo",
+      "target": "kakapo"
+    }
+  ]
+}

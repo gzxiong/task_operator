@@ -1,0 +1,169 @@
+{
+  "task": "translation",
+  "category": "lexical",
+  "split": "validation",
+  "seed": 0,
+  "n_records": 32,
+  "records": [
+    {
+      "example_id": "translation_0691",
+      "input": "understand",
+      "target": "comprendre"
+    },
+    {
+      "example_id": "translation_0696",
+      "input": "usually",
+      "target": "d'habitude"
+    },
+    {
+      "example_id": "translation_0174",
+      "input": "disease",
+      "target": "maladie"
+    },
+    {
+      "example_id": "translation_0619",
+      "input": "special",
+      "target": "sp\u00e9cial"
+    },
+    {
+      "example_id": "translation_0060",
+      "input": "bed",
+      "target": "lit"
+    },
+    {
+      "example_id": "translation_0533",
+      "input": "recent",
+      "target": "r\u00e9cent"
+    },
+    {
+      "example_id": "translation_0091",
+      "input": "campaign",
+      "target": "campagne"
+    },
+    {
+      "example_id": "translation_0699",
+      "input": "version",
+      "target": "version"
+    },
+    {
+      "example_id": "translation_0316",
+      "input": "include",
+      "target": "inclure"
+    },
+    {
+      "example_id": "translation_0725",
+      "input": "wish",
+      "target": "souhaiter"
+    },
+    {
+      "example_id": "translation_0237",
+      "input": "final",
+      "target": "final"
+    },
+    {
+      "example_id": "translation_0343",
+      "input": "land",
+      "target": "terre"
+    },
+    {
+      "example_id": "translation_0535",
+      "input": "recognize",
+      "target": "reconna\u00eetre"
+    },
+    {
+      "example_id": "translation_0216",
+      "input": "example",
+      "target": "exemple"
+    },
+    {
+      "example_id": "translation_0129",
+      "input": "company",
+      "target": "entreprise"
+    },
+    {
+      "example_id": "translation_0636",
+      "input": "street",
+      "target": "rue"
+    },
+    {
+      "example_id": "translation_0073",
+      "input": "blue",
+      "target": "bleu"
+    },
+    {
+      "example_id": "translation_0413",
+      "input": "nation",
+      "target": "nation"
+    },
+    {
+      "example_id": "translation_0525",
+      "input": "reach",
+      "target": "atteindre"
+    },
+    {
+      "example_id": "translation_0453",
+      "input": "over",
+      "target": "sur"
+    },
+    {
+      "example_id": "translation_0193",
+      "input": "economy",
+      "target": "\u00e9conomie"
+    },
+    {
+      "example_id": "translation_0071",
+      "input": "bit",
+      "target": "bit"
+    },
+    {
+      "example_id": "translation_0728",
+      "input": "word",
+      "target": "mot"
+    },
+    {
+      "example_id": "translation_0381",
+      "input": "mean",
+      "target": "moyenne"
+    },
+    {
+      "example_id": "translation_0330",
+      "input": "it",
+      "target": "ce"
+    },
+    {
+      "example_id": "translation_0468",
+      "input": "performance",
+      "target": "performance"
+    },
+    {
+      "example_id": "translation_0518",
+      "input": "question",
+      "target": "question"
+    },
+    {
+      "example_id": "translation_0166",
+      "input": "development",
+      "target": "d\u00e9veloppement"
+    },
+    {
+      "example_id": "translation_0168",
+      "input": "difference",
+      "target": "diff\u00e9rence"
+    },
+    {
+      "example_id": "translation_0351",
+      "input": "leave",
+      "target": "laisser"
+    },
+    {
+      "example_id": "translation_0199",
+      "input": "election",
+      "target": "\u00e9lection"
+    },
+    {
+      "example_id": "translation_0411",
+      "input": "n't",
+      "target": "nt"
+    }
+  ]
+}

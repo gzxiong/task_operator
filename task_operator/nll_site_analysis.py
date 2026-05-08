@@ -51,9 +51,8 @@ expected number of slots is small (≤ ~12 per layer) so layer × slot
 already produces O(10^3) sites and a per-head ablation would inflate
 this by another factor of n_heads (32–40). The kill semantics still
 fall back to the per-head identity `(w_h=1, ch_h=0)` applied to every
-head of the slot, exactly matching `gap_analysis`'s killed-site
-convention. This module pairs naturally with the standard task_operator
-mean_circuit produced by `task_operator.extract_knowledge`.
+head of the slot. This module pairs naturally with the standard
+mean_circuit produced by `core.extract_knowledge`.
 """
 
 from __future__ import annotations
@@ -66,13 +65,13 @@ import torch.nn.functional as F
 
 from .model import get_decoder_layers, get_text_config
 from .prompting import build_full_icl_prompt, build_zsl_prompt
-from .search import (
-    _per_sample_nll_from_logits,
-    _zsl_positions_for_record,
+from .nll_utils import (
+    per_sample_nll_from_logits,
     prepare_sample,
+    zsl_positions_for_record,
 )
 from .spans import identify_context_query, resolve_query_positions
-from .task_operator import (
+from .core import (
     TaskOperatorConfig,
     _slot_id_for_record,
 )
@@ -145,9 +144,9 @@ def _make_oproj_batched_recon_hook(
 ):
     """Forward hook on `decoder_layers[L].self_attn.o_proj` that overrides
     output[batch_idx[i], pos_idx[i], :] with the apply-time recon arithmetic
-    `(x * scale_w + ch.flat) @ W_o^T`. Lifted from `search._make_oproj_recon_hook`
-    so this module does not depend on a private symbol; identical arithmetic.
-    """
+    `(x * scale_w + ch.flat) @ W_o^T`. Same arithmetic as `apply_task_operator`
+    at test time; here we apply it on a teacher-forced ZSL+target forward to
+    measure per-site NLL recovery."""
 
     def hook(module, inputs, output):
         if output.shape[1] == 1:
@@ -203,7 +202,7 @@ def _build_per_layer_recon_tensors(
             site_flat = site_lookup.get((int(layer_idx), str(slot_id)))
             if site_flat is None:
                 continue
-            zsl_ps = _zsl_positions_for_record(sample, rec)
+            zsl_ps = zsl_positions_for_record(sample, rec)
             if not zsl_ps:
                 continue
             for b in range(B):
@@ -306,7 +305,7 @@ def _process_one_sample(
                 input_ids=input_ids_ctrl, attention_mask=attn_mask_ctrl,
                 use_cache=False, output_hidden_states=False, return_dict=True,
             )
-        ctrl_nlls = _per_sample_nll_from_logits(
+        ctrl_nlls = per_sample_nll_from_logits(
             out.logits, [zsl_prompt_len] * 2,
             [target_padded] * 2, [n_target] * 2,
         )
@@ -344,7 +343,7 @@ def _process_one_sample(
                     input_ids=input_ids_kill, attention_mask=attn_mask_kill,
                     use_cache=False, output_hidden_states=False, return_dict=True,
                 )
-            kill_nlls = _per_sample_nll_from_logits(
+            kill_nlls = per_sample_nll_from_logits(
                 out.logits, [zsl_prompt_len] * chunk_size,
                 [target_padded] * chunk_size, [n_target] * chunk_size,
             )
@@ -411,8 +410,8 @@ def extract_nll_site_stats(
         prompts (~50 tokens) the default 16 produces O(10^7) bfloat16 floats
         per layer which fits comfortably.
     return_per_sample : bool, default True
-        Reserved for parity with `gap_analysis` callers; the per-sample tensors
-        are always returned (the kill ablation is inherently per-sample).
+        Reserved for API symmetry; the per-sample tensors are always returned
+        (the kill ablation is inherently per-sample).
     """
 
     del return_per_sample  # the per-sample tensors are always emitted
@@ -711,7 +710,7 @@ def extract_nll_icl_per_sample(
                     input_ids=extended, attention_mask=attn_mask,
                     use_cache=False, output_hidden_states=False, return_dict=True,
                 )
-            nll_one = _per_sample_nll_from_logits(
+            nll_one = per_sample_nll_from_logits(
                 out.logits,
                 [int(sample["icl_prompt_len"])],
                 [sample["target_ids"][0]],
@@ -884,10 +883,8 @@ def filter_mean_circuit_by_score_topp(
         'highest' keeps the LARGEST-score sites (most important under our
         sign convention). 'lowest' is the dual ablation.
 
-    Killed slots are overridden per-head with `w_h = 1.0`, `ch_h = 0.0`,
-    matching `gap_analysis.filter_mean_circuit_by_gap_topp` and
-    `src_v3.circuit.sparsify_circuit`'s convention. Under
-    `apply_task_operator`'s recon arithmetic
+    Killed slots are overridden per-head with `w_h = 1.0`, `ch_h = 0.0`.
+    Under `apply_task_operator`'s recon arithmetic
     `y[token] = (x[token] * (w ⊗ 1_{head_dim})) @ W_o^T + ch.flat @ W_o^T`,
     `(w_h=1, ch_h=0)` produces the original head's o_proj contribution
     `x[head_h] @ W_o^h.T`, exactly skipping the patch at that head. Other

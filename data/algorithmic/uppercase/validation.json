@@ -1,0 +1,1289 @@
+{
+  "task": "uppercase",
+  "category": "algorithmic",
+  "split": "validation",
+  "seed": 0,
+  "n_records": 256,
+  "records": [
+    {
+      "example_id": "uppercase_01149",
+      "input": "b f c c c f b b g d",
+      "target": "B F C C C F B B G D"
+    },
+    {
+      "example_id": "uppercase_00990",
+      "input": "b d h e d f e h a b",
+      "target": "B D H E D F E H A B"
+    },
+    {
+      "example_id": "uppercase_00542",
+      "input": "c f d e a",
+      "target": "C F D E A"
+    },
+    {
+      "example_id": "uppercase_00610",
+      "input": "a g h h f d",
+      "target": "A G H H F D"
+    },
+    {
+      "example_id": "uppercase_01160",
+      "input": "e h g d a c c a f f",
+      "target": "E H G D A C C A F F"
+    },
+    {
+      "example_id": "uppercase_00445",
+      "input": "a h a a f a h c g",
+      "target": "A H A A F A H C G"
+    },
+    {
+      "example_id": "uppercase_00298",
+      "input": "f g a h g c c d b g f b",
+      "target": "F G A H G C C D B G F B"
+    },
+    {
+      "example_id": "uppercase_00182",
+      "input": "b c e h a d e b",
+      "target": "B C E H A D E B"
+    },
+    {
+      "example_id": "uppercase_00195",
+      "input": "e c a a g",
+      "target": "E C A A G"
+    },
+    {
+      "example_id": "uppercase_01239",
+      "input": "f b f b b f",
+      "target": "F B F B B F"
+    },
+    {
+      "example_id": "uppercase_01325",
+      "input": "a b g c c b g g d a g",
+      "target": "A B G C C B G G D A G"
+    },
+    {
+      "example_id": "uppercase_00458",
+      "input": "b f f f h e c h a f b a",
+      "target": "B F F F H E C H A F B A"
+    },
+    {
+      "example_id": "uppercase_00499",
+      "input": "c g h f c d a a h a e b",
+      "target": "C G H F C D A A H A E B"
+    },
+    {
+      "example_id": "uppercase_01003",
+      "input": "e c c h b d h a b",
+      "target": "E C C H B D H A B"
+    },
+    {
+      "example_id": "uppercase_00585",
+      "input": "f a d h b g d f",
+      "target": "F A D H B G D F"
+    },
+    {
+      "example_id": "uppercase_00032",
+      "input": "e f g h c",
+      "target": "E F G H C"
+    },
+    {
+      "example_id": "uppercase_01373",
+      "input": "d g b d e c a h a c h",
+      "target": "D G B D E C A H A C H"
+    },
+    {
+      "example_id": "uppercase_01235",
+      "input": "h a a g e",
+      "target": "H A A G E"
+    },
+    {
+      "example_id": "uppercase_00810",
+      "input": "a a f d b f d a g f f",
+      "target": "A A F D B F D A G F F"
+    },
+    {
+      "example_id": "uppercase_01031",
+      "input": "f f h f a g d d g f",
+      "target": "F F H F A G D D G F"
+    },
+    {
+      "example_id": "uppercase_00507",
+      "input": "a a b c f d b f",
+      "target": "A A B C F D B F"
+    },
+    {
+      "example_id": "uppercase_00519",
+      "input": "e d d g e c e d d b a",
+      "target": "E D D G E C E D D B A"
+    },
+    {
+      "example_id": "uppercase_00309",
+      "input": "c a b e a h g f f e b c",
+      "target": "C A B E A H G F F E B C"
+    },
+    {
+      "example_id": "uppercase_00752",
+      "input": "d h e e c e",
+      "target": "D H E E C E"
+    },
+    {
+      "example_id": "uppercase_00790",
+      "input": "a d g a a d b e g",
+      "target": "A D G A A D B E G"
+    },
+    {
+      "example_id": "uppercase_00020",
+      "input": "e h e h h f b",
+      "target": "E H E H H F B"
+    },
+    {
+      "example_id": "uppercase_00411",
+      "input": "a d f c a b d d",
+      "target": "A D F C A B D D"
+    },
+    {
+      "example_id": "uppercase_01032",
+      "input": "c d e c h e a h b g f",
+      "target": "C D E C H E A H B G F"
+    },
+    {
+      "example_id": "uppercase_00801",
+      "input": "b g c e f f g",
+      "target": "B G C E F F G"
+    },
+    {
+      "example_id": "uppercase_00128",
+      "input": "h d d f b e f h a",
+      "target": "H D D F B E F H A"
+    },
+    {
+      "example_id": "uppercase_00766",
+      "input": "d e a a g d e d g a",
+      "target": "D E A A G D E D G A"
+    },
+    {
+      "example_id": "uppercase_01291",
+      "input": "d g b b d h",
+      "target": "D G B B D H"
+    },
+    {
+      "example_id": "uppercase_00929",
+      "input": "g h f a c b a h f e c",
+      "target": "G H F A C B A H F E C"
+    },
+    {
+      "example_id": "uppercase_00200",
+      "input": "c g d a c f f a h",
+      "target": "C G D A C F F A H"
+    },
+    {
+      "example_id": "uppercase_00067",
+      "input": "d c a f f h",
+      "target": "D C A F F H"
+    },
+    {
+      "example_id": "uppercase_00241",
+      "input": "c c c f d a e d",
+      "target": "C C C F D A E D"
+    },
+    {
+      "example_id": "uppercase_00525",
+      "input": "b g d e g b e a b",
+      "target": "B G D E G B E A B"
+    },
+    {
+      "example_id": "uppercase_00593",
+      "input": "g e e c f a e h",
+      "target": "G E E C F A E H"
+    },
+    {
+      "example_id": "uppercase_00973",
+      "input": "b e e b b d c",
+      "target": "B E E B B D C"
+    },
+    {
+      "example_id": "uppercase_00530",
+      "input": "g c b a f b c c f b e",
+      "target": "G C B A F B C C F B E"
+    },
+    {
+      "example_id": "uppercase_00782",
+      "input": "b g c b h a h e d c e d",
+      "target": "B G C B H A H E D C E D"
+    },
+    {
+      "example_id": "uppercase_01000",
+      "input": "g h c e b g g a e a f",
+      "target": "G H C E B G G A E A F"
+    },
+    {
+      "example_id": "uppercase_01222",
+      "input": "f b b d c b d g",
+      "target": "F B B D C B D G"
+    },
+    {
+      "example_id": "uppercase_00977",
+      "input": "c b g g g e h g b h",
+      "target": "C B G G G E H G B H"
+    },
+    {
+      "example_id": "uppercase_01056",
+      "input": "d e h d a",
+      "target": "D E H D A"
+    },
+    {
+      "example_id": "uppercase_01111",
+      "input": "a h g h f f a g h a c",
+      "target": "A H G H F F A G H A C"
+    },
+    {
+      "example_id": "uppercase_01087",
+      "input": "d d a h b h f g c",
+      "target": "D D A H B H F G C"
+    },
+    {
+      "example_id": "uppercase_00637",
+      "input": "a a e h c c f d",
+      "target": "A A E H C C F D"
+    },
+    {
+      "example_id": "uppercase_00865",
+      "input": "b h f e h b f d h",
+      "target": "B H F E H B F D H"
+    },
+    {
+      "example_id": "uppercase_01162",
+      "input": "e g f b b",
+      "target": "E G F B B"
+    },
+    {
+      "example_id": "uppercase_00087",
+      "input": "g e g f h c c",
+      "target": "G E G F H C C"
+    },
+    {
+      "example_id": "uppercase_00958",
+      "input": "e g b g f g h c b e b b",
+      "target": "E G B G F G H C B E B B"
+    },
+    {
+      "example_id": "uppercase_00933",
+      "input": "g c d b c e d g g",
+      "target": "G C D B C E D G G"
+    },
+    {
+      "example_id": "uppercase_01277",
+      "input": "d d g g b c h a",
+      "target": "D D G G B C H A"
+    },
+    {
+      "example_id": "uppercase_00042",
+      "input": "c f g d a f h f c e g a",
+      "target": "C F G D A F H F C E G A"
+    },
+    {
+      "example_id": "uppercase_00522",
+      "input": "g b b d d g f d e b g e",
+      "target": "G B B D D G F D E B G E"
+    },
+    {
+      "example_id": "uppercase_00707",
+      "input": "e g e g e h e f g h",
+      "target": "E G E G E H E F G H"
+    },
+    {
+      "example_id": "uppercase_00348",
+      "input": "a f f d g c b d c",
+      "target": "A F F D G C B D C"
+    },
+    {
+      "example_id": "uppercase_00587",
+      "input": "g h b f d d g c c g h",
+      "target": "G H B F D D G C C G H"
+    },
+    {
+      "example_id": "uppercase_00300",
+      "input": "e f f e h c",
+      "target": "E F F E H C"
+    },
+    {
+      "example_id": "uppercase_00163",
+      "input": "a e e g d b h e d",
+      "target": "A E E G D B H E D"
+    },
+    {
+      "example_id": "uppercase_00969",
+      "input": "a a g e d h",
+      "target": "A A G E D H"
+    },
+    {
+      "example_id": "uppercase_00681",
+      "input": "b c c h h f b c g g g a",
+      "target": "B C C H H F B C G G G A"
+    },
+    {
+      "example_id": "uppercase_00863",
+      "input": "h c b d f b f h",
+      "target": "H C B D F B F H"
+    },
+    {
+      "example_id": "uppercase_00531",
+      "input": "e a a g f h h f h a",
+      "target": "E A A G F H H F H A"
+    },
+    {
+      "example_id": "uppercase_00646",
+      "input": "h d d a c f b f a d",
+      "target": "H D D A C F B F A D"
+    },
+    {
+      "example_id": "uppercase_01050",
+      "input": "a h c e c h h f f e d c",
+      "target": "A H C E C H H F F E D C"
+    },
+    {
+      "example_id": "uppercase_01085",
+      "input": "h e c d e",
+      "target": "H E C D E"
+    },
+    {
+      "example_id": "uppercase_00185",
+      "input": "f d b d f h e c f",
+      "target": "F D B D F H E C F"
+    },
+    {
+      "example_id": "uppercase_01380",
+      "input": "d c c b d h e a e f d",
+      "target": "D C C B D H E A E F D"
+    },
+    {
+      "example_id": "uppercase_00574",
+      "input": "h d e c b a e c b a b h",
+      "target": "H D E C B A E C B A B H"
+    },
+    {
+      "example_id": "uppercase_00690",
+      "input": "c e a c h h d c e f g c",
+      "target": "C E A C H H D C E F G C"
+    },
+    {
+      "example_id": "uppercase_00604",
+      "input": "a d g h f f c h d d e",
+      "target": "A D G H F F C H D D E"
+    },
+    {
+      "example_id": "uppercase_01200",
+      "input": "e g h g b h d h d c",
+      "target": "E G H G B H D H D C"
+    },
+    {
+      "example_id": "uppercase_01250",
+      "input": "c g a b d a b e",
+      "target": "C G A B D A B E"
+    },
+    {
+      "example_id": "uppercase_00034",
+      "input": "d b c b c",
+      "target": "D B C B C"
+    },
+    {
+      "example_id": "uppercase_00564",
+      "input": "e d b c a g a g c f h h",
+      "target": "E D B C A G A G C F H H"
+    },
+    {
+      "example_id": "uppercase_00432",
+      "input": "e d b d d b a g a",
+      "target": "E D B D D B A G A"
+    },
+    {
+      "example_id": "uppercase_00912",
+      "input": "h b f h h",
+      "target": "H B F H H"
+    },
+    {
+      "example_id": "uppercase_01001",
+      "input": "g d b a a c f",
+      "target": "G D B A A C F"
+    },
+    {
+      "example_id": "uppercase_00692",
+      "input": "d g h f a f",
+      "target": "D G H F A F"
+    },
+    {
+      "example_id": "uppercase_01215",
+      "input": "e c c g d e f e d",
+      "target": "E C C G D E F E D"
+    },
+    {
+      "example_id": "uppercase_00524",
+      "input": "h h d d d",
+      "target": "H H D D D"
+    },
+    {
+      "example_id": "uppercase_01054",
+      "input": "b b g f h g e f d f",
+      "target": "B B G F H G E F D F"
+    },
+    {
+      "example_id": "uppercase_00156",
+      "input": "c h h g f h",
+      "target": "C H H G F H"
+    },
+    {
+      "example_id": "uppercase_01266",
+      "input": "c a h g e",
+      "target": "C A H G E"
+    },
+    {
+      "example_id": "uppercase_00839",
+      "input": "a g b e c",
+      "target": "A G B E C"
+    },
+    {
+      "example_id": "uppercase_01293",
+      "input": "c c e d f d e g f",
+      "target": "C C E D F D E G F"
+    },
+    {
+      "example_id": "uppercase_01225",
+      "input": "e f g c h e b a a g c b",
+      "target": "E F G C H E B A A G C B"
+    },
+    {
+      "example_id": "uppercase_00745",
+      "input": "e e a e d d g f h b h a",
+      "target": "E E A E D D G F H B H A"
+    },
+    {
+      "example_id": "uppercase_00554",
+      "input": "a h b b a g g a a h",
+      "target": "A H B B A G G A A H"
+    },
+    {
+      "example_id": "uppercase_00596",
+      "input": "d f c a a d c",
+      "target": "D F C A A D C"
+    },
+    {
+      "example_id": "uppercase_01113",
+      "input": "f c g g e h b",
+      "target": "F C G G E H B"
+    },
+    {
+      "example_id": "uppercase_00084",
+      "input": "h h e a g e c a e f",
+      "target": "H H E A G E C A E F"
+    },
+    {
+      "example_id": "uppercase_00492",
+      "input": "e g e d g d h g e",
+      "target": "E G E D G D H G E"
+    },
+    {
+      "example_id": "uppercase_01307",
+      "input": "c a e b c f b h f f d h",
+      "target": "C A E B C F B H F F D H"
+    },
+    {
+      "example_id": "uppercase_00942",
+      "input": "b f d a e b g",
+      "target": "B F D A E B G"
+    },
+    {
+      "example_id": "uppercase_00872",
+      "input": "a d a b d a a",
+      "target": "A D A B D A A"
+    },
+    {
+      "example_id": "uppercase_00686",
+      "input": "e g h a b f e h g a h",
+      "target": "E G H A B F E H G A H"
+    },
+    {
+      "example_id": "uppercase_00249",
+      "input": "c f b d c g g",
+      "target": "C F B D C G G"
+    },
+    {
+      "example_id": "uppercase_00265",
+      "input": "h b h g h",
+      "target": "H B H G H"
+    },
+    {
+      "example_id": "uppercase_01012",
+      "input": "a h g d g f h e b c",
+      "target": "A H G D G F H E B C"
+    },
+    {
+      "example_id": "uppercase_00254",
+      "input": "d d e f f",
+      "target": "D D E F F"
+    },
+    {
+      "example_id": "uppercase_00847",
+      "input": "a a e e d e",
+      "target": "A A E E D E"
+    },
+    {
+      "example_id": "uppercase_00262",
+      "input": "c a b b e b c e d d",
+      "target": "C A B B E B C E D D"
+    },
+    {
+      "example_id": "uppercase_01359",
+      "input": "h a d a e g a g e a g",
+      "target": "H A D A E G A G E A G"
+    },
+    {
+      "example_id": "uppercase_00072",
+      "input": "c c f d d e d b h",
+      "target": "C C F D D E D B H"
+    },
+    {
+      "example_id": "uppercase_00673",
+      "input": "g b e g f e c e e a c",
+      "target": "G B E G F E C E E A C"
+    },
+    {
+      "example_id": "uppercase_00770",
+      "input": "d f d a b h f g e",
+      "target": "D F D A B H F G E"
+    },
+    {
+      "example_id": "uppercase_01135",
+      "input": "c g c b b e b g",
+      "target": "C G C B B E B G"
+    },
+    {
+      "example_id": "uppercase_01178",
+      "input": "g e a g d d f b e",
+      "target": "G E A G D D F B E"
+    },
+    {
+      "example_id": "uppercase_00446",
+      "input": "b g f g b g h e a h",
+      "target": "B G F G B G H E A H"
+    },
+    {
+      "example_id": "uppercase_00415",
+      "input": "e f c c g b b",
+      "target": "E F C C G B B"
+    },
+    {
+      "example_id": "uppercase_00147",
+      "input": "a f c a d g",
+      "target": "A F C A D G"
+    },
+    {
+      "example_id": "uppercase_01046",
+      "input": "f g c g f d e b g",
+      "target": "F G C G F D E B G"
+    },
+    {
+      "example_id": "uppercase_01279",
+      "input": "h h d a b a h e h",
+      "target": "H H D A B A H E H"
+    },
+    {
+      "example_id": "uppercase_00704",
+      "input": "d a f h e f g",
+      "target": "D A F H E F G"
+    },
+    {
+      "example_id": "uppercase_00939",
+      "input": "f c b c a f g f h g b",
+      "target": "F C B C A F G F H G B"
+    },
+    {
+      "example_id": "uppercase_00344",
+      "input": "f f c d d",
+      "target": "F F C D D"
+    },
+    {
+      "example_id": "uppercase_00660",
+      "input": "a c d e h d c h e b f f",
+      "target": "A C D E H D C H E B F F"
+    },
+    {
+      "example_id": "uppercase_00068",
+      "input": "f a d h e f e a h c a",
+      "target": "F A D H E F E A H C A"
+    },
+    {
+      "example_id": "uppercase_01091",
+      "input": "c f h h b c a b",
+      "target": "C F H H B C A B"
+    },
+    {
+      "example_id": "uppercase_00876",
+      "input": "f c h g e a a d g",
+      "target": "F C H G E A A D G"
+    },
+    {
+      "example_id": "uppercase_01142",
+      "input": "a a a e d",
+      "target": "A A A E D"
+    },
+    {
+      "example_id": "uppercase_00260",
+      "input": "f g a e c e b a d d g",
+      "target": "F G A E C E B A D D G"
+    },
+    {
+      "example_id": "uppercase_00416",
+      "input": "f b e h e h g",
+      "target": "F B E H E H G"
+    },
+    {
+      "example_id": "uppercase_00975",
+      "input": "h a f d e f",
+      "target": "H A F D E F"
+    },
+    {
+      "example_id": "uppercase_00246",
+      "input": "g f h h a b d b a b g c",
+      "target": "G F H H A B D B A B G C"
+    },
+    {
+      "example_id": "uppercase_00294",
+      "input": "c c a f d a h a a c",
+      "target": "C C A F D A H A A C"
+    },
+    {
+      "example_id": "uppercase_00726",
+      "input": "f b h h h g c",
+      "target": "F B H H H G C"
+    },
+    {
+      "example_id": "uppercase_00108",
+      "input": "c g h g c a b a f g",
+      "target": "C G H G C A B A F G"
+    },
+    {
+      "example_id": "uppercase_00202",
+      "input": "a f f e c a a b f",
+      "target": "A F F E C A A B F"
+    },
+    {
+      "example_id": "uppercase_00324",
+      "input": "d g h a e e f f b",
+      "target": "D G H A E E F F B"
+    },
+    {
+      "example_id": "uppercase_00287",
+      "input": "g c h e b d h",
+      "target": "G C H E B D H"
+    },
+    {
+      "example_id": "uppercase_00925",
+      "input": "h d e b e e g b d f d c",
+      "target": "H D E B E E G B D F D C"
+    },
+    {
+      "example_id": "uppercase_00172",
+      "input": "c b a e f f g e d d",
+      "target": "C B A E F F G E D D"
+    },
+    {
+      "example_id": "uppercase_01146",
+      "input": "b c d e f e b f",
+      "target": "B C D E F E B F"
+    },
+    {
+      "example_id": "uppercase_00906",
+      "input": "f f a f d h c g a f a e",
+      "target": "F F A F D H C G A F A E"
+    },
+    {
+      "example_id": "uppercase_01393",
+      "input": "b e d a h",
+      "target": "B E D A H"
+    },
+    {
+      "example_id": "uppercase_00617",
+      "input": "f h f g f d g",
+      "target": "F H F G F D G"
+    },
+    {
+      "example_id": "uppercase_00100",
+      "input": "f g e e e d e c a d",
+      "target": "F G E E E D E C A D"
+    },
+    {
+      "example_id": "uppercase_01099",
+      "input": "a h c e b b c d b e",
+      "target": "A H C E B B C D B E"
+    },
+    {
+      "example_id": "uppercase_00992",
+      "input": "d c h f c f b d h g h",
+      "target": "D C H F C F B D H G H"
+    },
+    {
+      "example_id": "uppercase_00282",
+      "input": "g g d c c d d g f h b",
+      "target": "G G D C C D D G F H B"
+    },
+    {
+      "example_id": "uppercase_00699",
+      "input": "a a c b e g f f c",
+      "target": "A A C B E G F F C"
+    },
+    {
+      "example_id": "uppercase_00756",
+      "input": "c h e f h f f h b f",
+      "target": "C H E F H F F H B F"
+    },
+    {
+      "example_id": "uppercase_00535",
+      "input": "e c c f d f b d b b",
+      "target": "E C C F D F B D B B"
+    },
+    {
+      "example_id": "uppercase_01007",
+      "input": "h g g a c d",
+      "target": "H G G A C D"
+    },
+    {
+      "example_id": "uppercase_00345",
+      "input": "b e b d a",
+      "target": "B E B D A"
+    },
+    {
+      "example_id": "uppercase_00273",
+      "input": "e h c g e e a h a g h",
+      "target": "E H C G E E A H A G H"
+    },
+    {
+      "example_id": "uppercase_01397",
+      "input": "f e a f c a g",
+      "target": "F E A F C A G"
+    },
+    {
+      "example_id": "uppercase_00466",
+      "input": "a f a g g e b h e",
+      "target": "A F A G G E B H E"
+    },
+    {
+      "example_id": "uppercase_00279",
+      "input": "a a c b g b d g f b",
+      "target": "A A C B G B D G F B"
+    },
+    {
+      "example_id": "uppercase_00503",
+      "input": "d c h g a e h f g",
+      "target": "D C H G A E H F G"
+    },
+    {
+      "example_id": "uppercase_00619",
+      "input": "b e h g c g d d e d",
+      "target": "B E H G C G D D E D"
+    },
+    {
+      "example_id": "uppercase_00173",
+      "input": "h e b h c",
+      "target": "H E B H C"
+    },
+    {
+      "example_id": "uppercase_01153",
+      "input": "h e c h c f g b",
+      "target": "H E C H C F G B"
+    },
+    {
+      "example_id": "uppercase_00987",
+      "input": "h g e f h e",
+      "target": "H G E F H E"
+    },
+    {
+      "example_id": "uppercase_00137",
+      "input": "c c g b c",
+      "target": "C C G B C"
+    },
+    {
+      "example_id": "uppercase_00308",
+      "input": "f d c b g e c f",
+      "target": "F D C B G E C F"
+    },
+    {
+      "example_id": "uppercase_00276",
+      "input": "c c f c f h d c",
+      "target": "C C F C F H D C"
+    },
+    {
+      "example_id": "uppercase_00160",
+      "input": "c b g a c a g",
+      "target": "C B G A C A G"
+    },
+    {
+      "example_id": "uppercase_00937",
+      "input": "h d g g a",
+      "target": "H D G G A"
+    },
+    {
+      "example_id": "uppercase_00380",
+      "input": "a g b h g b a d",
+      "target": "A G B H G B A D"
+    },
+    {
+      "example_id": "uppercase_00956",
+      "input": "e e g h h c",
+      "target": "E E G H H C"
+    },
+    {
+      "example_id": "uppercase_00488",
+      "input": "h g g f a a d h",
+      "target": "H G G F A A D H"
+    },
+    {
+      "example_id": "uppercase_00501",
+      "input": "d g b f b h",
+      "target": "D G B F B H"
+    },
+    {
+      "example_id": "uppercase_00297",
+      "input": "g e e c e e f c g",
+      "target": "G E E C E E F C G"
+    },
+    {
+      "example_id": "uppercase_00631",
+      "input": "f c d a d a b b f b a",
+      "target": "F C D A D A B B F B A"
+    },
+    {
+      "example_id": "uppercase_00439",
+      "input": "g e c d f a b e",
+      "target": "G E C D F A B E"
+    },
+    {
+      "example_id": "uppercase_00659",
+      "input": "d b d b g f e",
+      "target": "D B D B G F E"
+    },
+    {
+      "example_id": "uppercase_00769",
+      "input": "f b g b a c a b c c g c",
+      "target": "F B G B A C A B C C G C"
+    },
+    {
+      "example_id": "uppercase_00913",
+      "input": "f e f f e a c c e b",
+      "target": "F E F F E A C C E B"
+    },
+    {
+      "example_id": "uppercase_01062",
+      "input": "a g a f f",
+      "target": "A G A F F"
+    },
+    {
+      "example_id": "uppercase_00778",
+      "input": "g g e f d",
+      "target": "G G E F D"
+    },
+    {
+      "example_id": "uppercase_00860",
+      "input": "e c c g a",
+      "target": "E C C G A"
+    },
+    {
+      "example_id": "uppercase_00753",
+      "input": "c b d g g g a d f b c d",
+      "target": "C B D G G G A D F B C D"
+    },
+    {
+      "example_id": "uppercase_00377",
+      "input": "e d g a f g f a",
+      "target": "E D G A F G F A"
+    },
+    {
+      "example_id": "uppercase_00661",
+      "input": "f d d a f",
+      "target": "F D D A F"
+    },
+    {
+      "example_id": "uppercase_01074",
+      "input": "f e d c d h g f g e a d",
+      "target": "F E D C D H G F G E A D"
+    },
+    {
+      "example_id": "uppercase_01171",
+      "input": "d e e f e e h",
+      "target": "D E E F E E H"
+    },
+    {
+      "example_id": "uppercase_00788",
+      "input": "b b d a d d f a b b e f",
+      "target": "B B D A D D F A B B E F"
+    },
+    {
+      "example_id": "uppercase_01205",
+      "input": "b c g c f",
+      "target": "B C G C F"
+    },
+    {
+      "example_id": "uppercase_00444",
+      "input": "g g c d b c e c f",
+      "target": "G G C D B C E C F"
+    },
+    {
+      "example_id": "uppercase_01075",
+      "input": "h b e g f f e f",
+      "target": "H B E G F F E F"
+    },
+    {
+      "example_id": "uppercase_01203",
+      "input": "e b h f c f a g b",
+      "target": "E B H F C F A G B"
+    },
+    {
+      "example_id": "uppercase_01114",
+      "input": "g a h e g e h h",
+      "target": "G A H E G E H H"
+    },
+    {
+      "example_id": "uppercase_00613",
+      "input": "a b d h d g d f f g e",
+      "target": "A B D H D G D F F G E"
+    },
+    {
+      "example_id": "uppercase_00080",
+      "input": "f g d h c d g",
+      "target": "F G D H C D G"
+    },
+    {
+      "example_id": "uppercase_00636",
+      "input": "e g e a a h d b f",
+      "target": "E G E A A H D B F"
+    },
+    {
+      "example_id": "uppercase_00046",
+      "input": "e g h g f",
+      "target": "E G H G F"
+    },
+    {
+      "example_id": "uppercase_00843",
+      "input": "f d b f b g h h f g h",
+      "target": "F D B F B G H H F G H"
+    },
+    {
+      "example_id": "uppercase_00007",
+      "input": "e c a a e d g f e d h",
+      "target": "E C A A E D G F E D H"
+    },
+    {
+      "example_id": "uppercase_00044",
+      "input": "h a a d e h b f f g b",
+      "target": "H A A D E H B F F G B"
+    },
+    {
+      "example_id": "uppercase_00360",
+      "input": "e h d g b",
+      "target": "E H D G B"
+    },
+    {
+      "example_id": "uppercase_01211",
+      "input": "g e g e a a a e d",
+      "target": "G E G E A A A E D"
+    },
+    {
+      "example_id": "uppercase_00166",
+      "input": "h b a c a b c g g d b",
+      "target": "H B A C A B C G G D B"
+    },
+    {
+      "example_id": "uppercase_00130",
+      "input": "e g a b a c g",
+      "target": "E G A B A C G"
+    },
+    {
+      "example_id": "uppercase_01229",
+      "input": "a d f a f",
+      "target": "A D F A F"
+    },
+    {
+      "example_id": "uppercase_00838",
+      "input": "f h f b h d d a b g",
+      "target": "F H F B H D D A B G"
+    },
+    {
+      "example_id": "uppercase_00712",
+      "input": "e e f f c g d a a d",
+      "target": "E E F F C G D A A D"
+    },
+    {
+      "example_id": "uppercase_00016",
+      "input": "c h g f a a h h f e c",
+      "target": "C H G F A A H H F E C"
+    },
+    {
+      "example_id": "uppercase_00717",
+      "input": "c e c g h",
+      "target": "C E C G H"
+    },
+    {
+      "example_id": "uppercase_00148",
+      "input": "c e f g h b",
+      "target": "C E F G H B"
+    },
+    {
+      "example_id": "uppercase_00938",
+      "input": "c b a e d c",
+      "target": "C B A E D C"
+    },
+    {
+      "example_id": "uppercase_01398",
+      "input": "c f c d g c",
+      "target": "C F C D G C"
+    },
+    {
+      "example_id": "uppercase_00996",
+      "input": "f d b g e a a b a c",
+      "target": "F D B G E A A B A C"
+    },
+    {
+      "example_id": "uppercase_00729",
+      "input": "c f a a h h g d c g a g",
+      "target": "C F A A H H G D C G A G"
+    },
+    {
+      "example_id": "uppercase_00805",
+      "input": "f e c d d g b",
+      "target": "F E C D D G B"
+    },
+    {
+      "example_id": "uppercase_00774",
+      "input": "d h e h a h g f g f h b",
+      "target": "D H E H A H G F G F H B"
+    },
+    {
+      "example_id": "uppercase_01188",
+      "input": "f b e b d b",
+      "target": "F B E B D B"
+    },
+    {
+      "example_id": "uppercase_00730",
+      "input": "d d f e f a b d",
+      "target": "D D F E F A B D"
+    },
+    {
+      "example_id": "uppercase_00243",
+      "input": "d h c d d b b g d d g",
+      "target": "D H C D D B B G D D G"
+    },
+    {
+      "example_id": "uppercase_00372",
+      "input": "f b d e e",
+      "target": "F B D E E"
+    },
+    {
+      "example_id": "uppercase_00133",
+      "input": "f g e f b e e h",
+      "target": "F G E F B E E H"
+    },
+    {
+      "example_id": "uppercase_00139",
+      "input": "d g e h a h e h b g",
+      "target": "D G E H A H E H B G"
+    },
+    {
+      "example_id": "uppercase_01319",
+      "input": "e e a c a f",
+      "target": "E E A C A F"
+    },
+    {
+      "example_id": "uppercase_00431",
+      "input": "e f b b d h h h",
+      "target": "E F B B D H H H"
+    },
+    {
+      "example_id": "uppercase_00158",
+      "input": "d f g g h c d g d e e b",
+      "target": "D F G G H C D G D E E B"
+    },
+    {
+      "example_id": "uppercase_00363",
+      "input": "f b e b a f d d",
+      "target": "F B E B A F D D"
+    },
+    {
+      "example_id": "uppercase_00491",
+      "input": "b b d a f c a d f",
+      "target": "B B D A F C A D F"
+    },
+    {
+      "example_id": "uppercase_00534",
+      "input": "a d c g c d a f h g d a",
+      "target": "A D C G C D A F H G D A"
+    },
+    {
+      "example_id": "uppercase_00976",
+      "input": "a f b c g e g b d e",
+      "target": "A F B C G E G B D E"
+    },
+    {
+      "example_id": "uppercase_00237",
+      "input": "d a g h d e a c d",
+      "target": "D A G H D E A C D"
+    },
+    {
+      "example_id": "uppercase_00705",
+      "input": "g d h d h h",
+      "target": "G D H D H H"
+    },
+    {
+      "example_id": "uppercase_01026",
+      "input": "h f a h f g b f f c",
+      "target": "H F A H F G B F F C"
+    },
+    {
+      "example_id": "uppercase_01152",
+      "input": "g d g h f b g",
+      "target": "G D G H F B G"
+    },
+    {
+      "example_id": "uppercase_00875",
+      "input": "e a f g c c a",
+      "target": "E A F G C C A"
+    },
+    {
+      "example_id": "uppercase_00399",
+      "input": "f a d c f b b d b d",
+      "target": "F A D C F B B D B D"
+    },
+    {
+      "example_id": "uppercase_00448",
+      "input": "c e f e g",
+      "target": "C E F E G"
+    },
+    {
+      "example_id": "uppercase_01364",
+      "input": "g f a f e e f h g g g d",
+      "target": "G F A F E E F H G G G D"
+    },
+    {
+      "example_id": "uppercase_01386",
+      "input": "d g h d d h",
+      "target": "D G H D D H"
+    },
+    {
+      "example_id": "uppercase_01261",
+      "input": "g b h b d h",
+      "target": "G B H B D H"
+    },
+    {
+      "example_id": "uppercase_00567",
+      "input": "d b a e b a f h d c",
+      "target": "D B A E B A F H D C"
+    },
+    {
+      "example_id": "uppercase_00832",
+      "input": "a f e d g h a",
+      "target": "A F E D G H A"
+    },
+    {
+      "example_id": "uppercase_00110",
+      "input": "c a g a a d f e",
+      "target": "C A G A A D F E"
+    },
+    {
+      "example_id": "uppercase_01253",
+      "input": "b a h c a c b a d a h h",
+      "target": "B A H C A C B A D A H H"
+    },
+    {
+      "example_id": "uppercase_01389",
+      "input": "b b h f h e b b",
+      "target": "B B H F H E B B"
+    },
+    {
+      "example_id": "uppercase_00189",
+      "input": "c c c e f f b h a h a",
+      "target": "C C C E F F B H A H A"
+    },
+    {
+      "example_id": "uppercase_00957",
+      "input": "e d c g f h h h e",
+      "target": "E D C G F H H H E"
+    },
+    {
+      "example_id": "uppercase_00402",
+      "input": "f g h d e a f h f",
+      "target": "F G H D E A F H F"
+    },
+    {
+      "example_id": "uppercase_00484",
+      "input": "c c a g e",
+      "target": "C C A G E"
+    },
+    {
+      "example_id": "uppercase_00219",
+      "input": "d h d c a f a b f g",
+      "target": "D H D C A F A B F G"
+    },
+    {
+      "example_id": "uppercase_00000",
+      "input": "c b a d e d f",
+      "target": "C B A D E D F"
+    },
+    {
+      "example_id": "uppercase_01338",
+      "input": "g g f d e a",
+      "target": "G G F D E A"
+    },
+    {
+      "example_id": "uppercase_00594",
+      "input": "b b b h b d a b e g d",
+      "target": "B B B H B D A B E G D"
+    },
+    {
+      "example_id": "uppercase_01370",
+      "input": "h c b a b a g h",
+      "target": "H C B A B A G H"
+    },
+    {
+      "example_id": "uppercase_00425",
+      "input": "b f h b b",
+      "target": "B F H B B"
+    },
+    {
+      "example_id": "uppercase_00332",
+      "input": "g b g g a b c",
+      "target": "G B G G A B C"
+    },
+    {
+      "example_id": "uppercase_01191",
+      "input": "e c f c b",
+      "target": "E C F C B"
+    },
+    {
+      "example_id": "uppercase_01066",
+      "input": "h h f a c d h",
+      "target": "H H F A C D H"
+    },
+    {
+      "example_id": "uppercase_00064",
+      "input": "a g d f c",
+      "target": "A G D F C"
+    },
+    {
+      "example_id": "uppercase_01174",
+      "input": "e h a h d a e g e h h",
+      "target": "E H A H D A E G E H H"
+    },
+    {
+      "example_id": "uppercase_00347",
+      "input": "b b a g c d f a a",
+      "target": "B B A G C D F A A"
+    },
+    {
+      "example_id": "uppercase_00330",
+      "input": "e c e a d",
+      "target": "E C E A D"
+    },
+    {
+      "example_id": "uppercase_00776",
+      "input": "h d e c h e f",
+      "target": "H D E C H E F"
+    }
+  ]
+}

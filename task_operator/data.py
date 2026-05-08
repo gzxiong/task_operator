@@ -8,15 +8,30 @@ Three task categories:
 Reasoning tasks generate up to 512 new tokens and stop on '\\nInput:' (substring
 of the demo separator '\\n\\nInput:'); lexical and algorithmic tasks generate up
 to 64 tokens and stop on '\\n'.
+
+The data root is resolved from the `TASK_OPERATOR_DATA` env var, falling back
+to the `data/` directory next to the package.
 """
 
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = PROJECT_ROOT / "data_final_v2"
+PACKAGE_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = PACKAGE_ROOT.parent
+_DATA_DIR_ENV = "TASK_OPERATOR_DATA"
+_DEFAULT_DATA_DIR = REPO_ROOT / "data"
+
+
+def _data_dir() -> Path:
+    val = os.environ.get(_DATA_DIR_ENV)
+    if not val:
+        return _DEFAULT_DATA_DIR
+    p = Path(val)
+    return p if p.is_absolute() else (REPO_ROOT / p)
+
 
 LEXICAL_TASKS = ["translation", "linguistic"]
 ALGORITHMIC_TASKS = ["uppercase", "reverse", "deduplicate"]
@@ -54,7 +69,7 @@ def max_new_tokens_for_category(category: str) -> int:
 
 
 def split_path(task: str, split: str) -> Path:
-    return DATA_DIR / task_category(task) / task / f"{split}.json"
+    return _data_dir() / task_category(task) / task / f"{split}.json"
 
 
 def load_split(task: str, split: str) -> list[dict]:
@@ -67,11 +82,7 @@ def load_split(task: str, split: str) -> list[dict]:
 
 def assert_splits_exist(tasks: list[str] | None = None,
                          splits: tuple[str, ...] = ("demos", "validation", "test")) -> None:
-    """Preflight: raise FileNotFoundError listing every missing `<task>/<split>.json`.
-
-    Run before any expensive (model-loading) cell to fail fast when notebook 01 has
-    not been run for some tasks.
-    """
+    """Preflight: raise FileNotFoundError listing every missing `<task>/<split>.json`."""
 
     ts = list(tasks) if tasks else list(ALL_TASKS)
     missing = []
@@ -83,5 +94,5 @@ def assert_splits_exist(tasks: list[str] | None = None,
     if missing:
         listing = "\n  ".join(missing)
         raise FileNotFoundError(
-            f"Missing data_final_v2 split files (run 01_data_generation.ipynb):\n  {listing}"
+            f"Missing data split files (set TASK_OPERATOR_DATA or run scripts/prepare_data.py):\n  {listing}"
         )

@@ -526,8 +526,8 @@ def extract_knowledge(
     patches.
 
     When `return_per_sample=True`, returns `(mean_circuit, raw)` where `raw` is the
-    list of per-sample dicts produced by `_extract_one_sample` — used for stability
-    analyses that need cross-sample / cross-token tensors before aggregation.
+    list of per-sample dicts produced by `_extract_one_sample` — useful for
+    cross-sample / cross-token analyses before aggregation.
     """
 
     raw, skipped = [], []

@@ -1,0 +1,649 @@
+{
+  "task": "reverse",
+  "category": "algorithmic",
+  "split": "test",
+  "seed": 0,
+  "n_records": 128,
+  "records": [
+    {
+      "example_id": "reverse_00175",
+      "input": "b d a h f g d b h",
+      "target": "h b d g f h a d b"
+    },
+    {
+      "example_id": "reverse_00688",
+      "input": "a g e c g g g b a",
+      "target": "a b g g g c e g a"
+    },
+    {
+      "example_id": "reverse_00836",
+      "input": "d f d e g b a",
+      "target": "a b g e d f d"
+    },
+    {
+      "example_id": "reverse_00742",
+      "input": "g a h c g a c f",
+      "target": "f c a g c h a g"
+    },
+    {
+      "example_id": "reverse_01382",
+      "input": "f g b c g d h h f",
+      "target": "f h h d g c b g f"
+    },
+    {
+      "example_id": "reverse_00270",
+      "input": "f g b g d a h d",
+      "target": "d h a d g b g f"
+    },
+    {
+      "example_id": "reverse_00333",
+      "input": "c b h g h c f f h",
+      "target": "h f f c h g h b c"
+    },
+    {
+      "example_id": "reverse_00231",
+      "input": "b b a f h b b a g h d b",
+      "target": "b d h g a b b h f a b b"
+    },
+    {
+      "example_id": "reverse_00023",
+      "input": "h e d f c h f",
+      "target": "f h c f d e h"
+    },
+    {
+      "example_id": "reverse_00657",
+      "input": "g e h h g g h c d",
+      "target": "d c h g g h h e g"
+    },
+    {
+      "example_id": "reverse_00789",
+      "input": "a g b e g a e",
+      "target": "e a g e b g a"
+    },
+    {
+      "example_id": "reverse_00998",
+      "input": "h h b e h e a d h g",
+      "target": "g h d a e h e b h h"
+    },
+    {
+      "example_id": "reverse_00857",
+      "input": "c a c g f g",
+      "target": "g f g c a c"
+    },
+    {
+      "example_id": "reverse_01151",
+      "input": "g a a b h h a h h",
+      "target": "h h a h h b a a g"
+    },
+    {
+      "example_id": "reverse_00337",
+      "input": "d e d f f a d c d",
+      "target": "d c d a f f d e d"
+    },
+    {
+      "example_id": "reverse_00851",
+      "input": "d e a h b c",
+      "target": "c b h a e d"
+    },
+    {
+      "example_id": "reverse_00076",
+      "input": "d d e h d a e g f h g",
+      "target": "g h f g e a d h e d d"
+    },
+    {
+      "example_id": "reverse_00414",
+      "input": "g h f c e",
+      "target": "e c f h g"
+    },
+    {
+      "example_id": "reverse_01344",
+      "input": "d a c b f h d h f",
+      "target": "f h d h f b c a d"
+    },
+    {
+      "example_id": "reverse_00678",
+      "input": "g b g d e e d c h",
+      "target": "h c d e e d g b g"
+    },
+    {
+      "example_id": "reverse_00259",
+      "input": "h g b b a b e e c d d",
+      "target": "d d c e e b a b b g h"
+    },
+    {
+      "example_id": "reverse_01064",
+      "input": "e g a b f d h b",
+      "target": "b h d f b a g e"
+    },
+    {
+      "example_id": "reverse_01073",
+      "input": "d a f g b h c a e c h",
+      "target": "h c e a c h b g f a d"
+    },
+    {
+      "example_id": "reverse_00868",
+      "input": "g d h b e h f c",
+      "target": "c f h e b h d g"
+    },
+    {
+      "example_id": "reverse_00462",
+      "input": "g h f a c b",
+      "target": "b c a f h g"
+    },
+    {
+      "example_id": "reverse_00719",
+      "input": "e a e b g e b d f h g e",
+      "target": "e g h f d b e g b e a e"
+    },
+    {
+      "example_id": "reverse_00190",
+      "input": "e e a d e",
+      "target": "e d a e e"
+    },
+    {
+      "example_id": "reverse_00192",
+      "input": "b c h e a f a c a e",
+      "target": "e a c a f a e h c b"
+    },
+    {
+      "example_id": "reverse_01242",
+      "input": "f d g f a",
+      "target": "a f g d f"
+    },
+    {
+      "example_id": "reverse_00529",
+      "input": "c d e b b a f d g",
+      "target": "g d f a b b e d c"
+    },
+    {
+      "example_id": "reverse_00379",
+      "input": "c e f e e a d",
+      "target": "d a e e f e c"
+    },
+    {
+      "example_id": "reverse_00359",
+      "input": "h a d g a g g d f",
+      "target": "f d g g a g d a h"
+    },
+    {
+      "example_id": "reverse_00438",
+      "input": "b b f e f b e c f a g g",
+      "target": "g g a f c e b f e f b b"
+    },
+    {
+      "example_id": "reverse_01182",
+      "input": "a h e e h f d a a c f c",
+      "target": "c f c a a d f h e e h a"
+    },
+    {
+      "example_id": "reverse_00435",
+      "input": "e a g a e a g e g",
+      "target": "g e g a e a g a e"
+    },
+    {
+      "example_id": "reverse_00930",
+      "input": "h d e b f d g d",
+      "target": "d g d f b e d h"
+    },
+    {
+      "example_id": "reverse_01137",
+      "input": "d c e g c",
+      "target": "c g e c d"
+    },
+    {
+      "example_id": "reverse_00840",
+      "input": "a e g d c h f b g",
+      "target": "g b f h c d g e a"
+    },
+    {
+      "example_id": "reverse_00470",
+      "input": "b e d b a f f a e d e a",
+      "target": "a e d e a f f a b d e b"
+    },
+    {
+      "example_id": "reverse_00278",
+      "input": "h e b c h b c b e",
+      "target": "e b c b h c b e h"
+    },
+    {
+      "example_id": "reverse_01324",
+      "input": "d d g a f a",
+      "target": "a f a g d d"
+    },
+    {
+      "example_id": "reverse_01045",
+      "input": "d b d h e g b a",
+      "target": "a b g e h d b d"
+    },
+    {
+      "example_id": "reverse_00498",
+      "input": "a h b a e g b f",
+      "target": "f b g e a b h a"
+    },
+    {
+      "example_id": "reverse_01190",
+      "input": "f b d a f g g h g",
+      "target": "g h g g f a d b f"
+    },
+    {
+      "example_id": "reverse_00461",
+      "input": "h a a f f g e g c d e",
+      "target": "e d c g e g f f a a h"
+    },
+    {
+      "example_id": "reverse_00496",
+      "input": "b c b g f d b",
+      "target": "b d f g b c b"
+    },
+    {
+      "example_id": "reverse_00545",
+      "input": "f d g g a",
+      "target": "a g g d f"
+    },
+    {
+      "example_id": "reverse_00317",
+      "input": "f h b f e b c e d b g",
+      "target": "g b d e c b e f b h f"
+    },
+    {
+      "example_id": "reverse_00709",
+      "input": "g g f c g e",
+      "target": "e g c f g g"
+    },
+    {
+      "example_id": "reverse_01009",
+      "input": "e h d a f g f c c h c e",
+      "target": "e c h c c f g f a d h e"
+    },
+    {
+      "example_id": "reverse_00487",
+      "input": "g f a h h c a e e",
+      "target": "e e a c h h a f g"
+    },
+    {
+      "example_id": "reverse_00320",
+      "input": "g f d d c h h h",
+      "target": "h h h c d d f g"
+    },
+    {
+      "example_id": "reverse_00786",
+      "input": "e f h f d g a",
+      "target": "a g d f h f e"
+    },
+    {
+      "example_id": "reverse_00586",
+      "input": "e g g a d b h e",
+      "target": "e h b d a g g e"
+    },
+    {
+      "example_id": "reverse_00409",
+      "input": "b e f c e h g h e",
+      "target": "e h g h e c f e b"
+    },
+    {
+      "example_id": "reverse_00443",
+      "input": "e b a d d",
+      "target": "d d a b e"
+    },
+    {
+      "example_id": "reverse_00368",
+      "input": "b e b b d h g c a h a a",
+      "target": "a a h a c g h d b b e b"
+    },
+    {
+      "example_id": "reverse_00304",
+      "input": "h e b e f",
+      "target": "f e b e h"
+    },
+    {
+      "example_id": "reverse_01315",
+      "input": "f a e b h b",
+      "target": "b h b e a f"
+    },
+    {
+      "example_id": "reverse_00506",
+      "input": "b f d h b h e",
+      "target": "e h b h d f b"
+    },
+    {
+      "example_id": "reverse_01224",
+      "input": "b g e c g c b b",
+      "target": "b b c g c e g b"
+    },
+    {
+      "example_id": "reverse_01335",
+      "input": "e a c h e f g",
+      "target": "g f e h c a e"
+    },
+    {
+      "example_id": "reverse_00787",
+      "input": "b e h e c a f g d a a c",
+      "target": "c a a d g f a c e h e b"
+    },
+    {
+      "example_id": "reverse_00085",
+      "input": "b h d b a g e g f e",
+      "target": "e f g e g a b d h b"
+    },
+    {
+      "example_id": "reverse_01249",
+      "input": "b f a a b",
+      "target": "b a a f b"
+    },
+    {
+      "example_id": "reverse_00627",
+      "input": "b e e f e g b d g f f f",
+      "target": "f f f g d b g e f e e b"
+    },
+    {
+      "example_id": "reverse_00654",
+      "input": "a b f f a g f",
+      "target": "f g a f f b a"
+    },
+    {
+      "example_id": "reverse_00916",
+      "input": "e a d d f h g c a a",
+      "target": "a a c g h f d d a e"
+    },
+    {
+      "example_id": "reverse_01154",
+      "input": "a h c b b e g h h d",
+      "target": "d h h g e b b c h a"
+    },
+    {
+      "example_id": "reverse_01323",
+      "input": "f c d e b a h",
+      "target": "h a b e d c f"
+    },
+    {
+      "example_id": "reverse_00019",
+      "input": "g f a g c b a c d d f g",
+      "target": "g f d d c a b c g a f g"
+    },
+    {
+      "example_id": "reverse_01183",
+      "input": "d a b d b c h a e",
+      "target": "e a h c b d b a d"
+    },
+    {
+      "example_id": "reverse_00743",
+      "input": "b b c d f a",
+      "target": "a f d c b b"
+    },
+    {
+      "example_id": "reverse_01195",
+      "input": "h f b a f b f a d d g",
+      "target": "g d d a f b f a b f h"
+    },
+    {
+      "example_id": "reverse_00780",
+      "input": "f f c f b b g c e",
+      "target": "e c g b b f c f f"
+    },
+    {
+      "example_id": "reverse_00521",
+      "input": "h g d c f h c",
+      "target": "c h f c d g h"
+    },
+    {
+      "example_id": "reverse_00781",
+      "input": "b b c e c",
+      "target": "c e c b b"
+    },
+    {
+      "example_id": "reverse_00518",
+      "input": "f c g d g f e b a g",
+      "target": "g a b e f g d g c f"
+    },
+    {
+      "example_id": "reverse_00460",
+      "input": "b c f g e f a h",
+      "target": "h a f e g f c b"
+    },
+    {
+      "example_id": "reverse_00089",
+      "input": "g e g g a",
+      "target": "a g g e g"
+    },
+    {
+      "example_id": "reverse_00049",
+      "input": "h a f c b h a d h e f e",
+      "target": "e f e h d a h b c f a h"
+    },
+    {
+      "example_id": "reverse_01350",
+      "input": "h d g b c h a f",
+      "target": "f a h c b g d h"
+    },
+    {
+      "example_id": "reverse_00350",
+      "input": "b e g c g b g b e d d b",
+      "target": "b d d e b g b g c g e b"
+    },
+    {
+      "example_id": "reverse_00718",
+      "input": "c d a h g b h f",
+      "target": "f h b g h a d c"
+    },
+    {
+      "example_id": "reverse_00830",
+      "input": "g h h e d a e e d d",
+      "target": "d d e e a d e h h g"
+    },
+    {
+      "example_id": "reverse_00153",
+      "input": "h b h c g b f e d g e",
+      "target": "e g d e f b g c h b h"
+    },
+    {
+      "example_id": "reverse_00129",
+      "input": "f g a a h",
+      "target": "h a a g f"
+    },
+    {
+      "example_id": "reverse_00184",
+      "input": "h h a a a",
+      "target": "a a a h h"
+    },
+    {
+      "example_id": "reverse_00132",
+      "input": "e d d h a c f d",
+      "target": "d f c a h d d e"
+    },
+    {
+      "example_id": "reverse_00601",
+      "input": "a a h a h",
+      "target": "h a h a a"
+    },
+    {
+      "example_id": "reverse_00760",
+      "input": "h b b g g h a b",
+      "target": "b a h g g b b h"
+    },
+    {
+      "example_id": "reverse_00935",
+      "input": "h f d b e g b b a e",
+      "target": "e a b b g e b d f h"
+    },
+    {
+      "example_id": "reverse_00281",
+      "input": "f c d e h e b b d d f d",
+      "target": "d f d d b b e h e d c f"
+    },
+    {
+      "example_id": "reverse_01051",
+      "input": "a e c g g a d g c",
+      "target": "c g d a g g c e a"
+    },
+    {
+      "example_id": "reverse_01053",
+      "input": "e h e h e e",
+      "target": "e e h e h e"
+    },
+    {
+      "example_id": "reverse_00453",
+      "input": "a c d d b d a h h",
+      "target": "h h a d b d d c a"
+    },
+    {
+      "example_id": "reverse_00955",
+      "input": "e a c d a c a d c c",
+      "target": "c c d a c a d c a e"
+    },
+    {
+      "example_id": "reverse_00539",
+      "input": "e e f g f f f a",
+      "target": "a f f f g f e e"
+    },
+    {
+      "example_id": "reverse_01395",
+      "input": "b a g e h g d d",
+      "target": "d d g h e g a b"
+    },
+    {
+      "example_id": "reverse_00714",
+      "input": "g f c e b g g h",
+      "target": "h g g b e c f g"
+    },
+    {
+      "example_id": "reverse_00058",
+      "input": "g f h d d c e e b h",
+      "target": "h b e e c d d h f g"
+    },
+    {
+      "example_id": "reverse_00737",
+      "input": "f a b a d a d c",
+      "target": "c d a d a b a f"
+    },
+    {
+      "example_id": "reverse_01255",
+      "input": "f f e h e g g a a",
+      "target": "a a g g e h e f f"
+    },
+    {
+      "example_id": "reverse_00292",
+      "input": "c a a h e f a c c a b",
+      "target": "b a c c a f e h a a c"
+    },
+    {
+      "example_id": "reverse_00428",
+      "input": "f c c e a",
+      "target": "a e c c f"
+    },
+    {
+      "example_id": "reverse_01092",
+      "input": "c d f b c a b h c f",
+      "target": "f c h b a c b f d c"
+    },
+    {
+      "example_id": "reverse_00526",
+      "input": "g e g e g c d d a d",
+      "target": "d a d d c g e g e g"
+    },
+    {
+      "example_id": "reverse_00540",
+      "input": "c a b a d g f b f g",
+      "target": "g f b f g d a b a c"
+    },
+    {
+      "example_id": "reverse_00982",
+      "input": "f c c h e b",
+      "target": "b e h c c f"
+    },
+    {
+      "example_id": "reverse_01065",
+      "input": "f a d b g e b d",
+      "target": "d b e g b d a f"
+    },
+    {
+      "example_id": "reverse_01157",
+      "input": "h b a h g g a e d d f c",
+      "target": "c f d d e a g g h a b h"
+    },
+    {
+      "example_id": "reverse_01345",
+      "input": "e b b g a",
+      "target": "a g b b e"
+    },
+    {
+      "example_id": "reverse_00680",
+      "input": "f a e b h d",
+      "target": "d h b e a f"
+    },
+    {
+      "example_id": "reverse_00272",
+      "input": "d d g a f a a g e d a b",
+      "target": "b a d e g a a f a g d d"
+    },
+    {
+      "example_id": "reverse_00668",
+      "input": "d c c d b b b a a e",
+      "target": "e a a b b b d c c d"
+    },
+    {
+      "example_id": "reverse_00693",
+      "input": "g d h d b c d",
+      "target": "d c b d h d g"
+    },
+    {
+      "example_id": "reverse_00419",
+      "input": "g a a h b",
+      "target": "b h a a g"
+    },
+    {
+      "example_id": "reverse_00256",
+      "input": "b d d c f h a c",
+      "target": "c a h f c d d b"
+    },
+    {
+      "example_id": "reverse_00181",
+      "input": "g a e d a",
+      "target": "a d e a g"
+    },
+    {
+      "example_id": "reverse_00162",
+      "input": "c a d g e g c h b d",
+      "target": "d b h c g e g d a c"
+    },
+    {
+      "example_id": "reverse_00051",
+      "input": "c a g d f e h c d g f g",
+      "target": "g f g d c h e f d g a c"
+    },
+    {
+      "example_id": "reverse_00931",
+      "input": "g b a f c f b h c a g f",
+      "target": "f g a c h b f c f a b g"
+    },
+    {
+      "example_id": "reverse_00665",
+      "input": "c a h a d",
+      "target": "d a h a c"
+    },
+    {
+      "example_id": "reverse_01078",
+      "input": "e e d a g d g h g",
+      "target": "g h g d g a d e e"
+    },
+    {
+      "example_id": "reverse_00768",
+      "input": "e a b g d h c a a",
+      "target": "a a c h d g b a e"
+    },
+    {
+      "example_id": "reverse_00568",
+      "input": "d b f b a g b",
+      "target": "b g a b f b d"
+    },
+    {
+      "example_id": "reverse_00740",
+      "input": "b e f e f b a",
+      "target": "a b f e f e b"
+    },
+    {
+      "example_id": "reverse_00140",
+      "input": "g b h c c c a h a",
+      "target": "a h a c c c h b g"
+    }
+  ]
+}

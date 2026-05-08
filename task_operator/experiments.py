@@ -26,9 +26,7 @@ from .io import (
     fingerprint as _fingerprint,
     is_shard_complete,
     load_or_init_shard,
-    nto_paths,
     predictions_path,
-    search_paths,
     task_operator_paths,
 )
 from .model import MODEL_REGISTRY, load_hf_model
@@ -38,15 +36,10 @@ from .prompting import (
     DEMO_TEMPLATE,
     QUERY_TEMPLATE,
 )
-from .task_operator import (
+from .core import (
     TaskOperatorConfig,
     apply_task_operator,
     extract_knowledge,
-)
-from .nto import (
-    NTOConfig,
-    apply_canonical_task_operator,
-    extract_canonical_knowledge,
 )
 
 DEFAULT_REP_PENALTY = 1.1
@@ -81,40 +74,21 @@ def make_default_config(task: str, *, repetition_penalty: float = DEFAULT_REP_PE
     )
 
 
-def config_from_searched(
+def make_allpos_config(
     task: str,
-    fc: dict,
     *,
-    all_layers: bool = False,
-    all_positions: bool = False,
     repetition_penalty: float = DEFAULT_REP_PENALTY,
 ) -> TaskOperatorConfig:
-    """Build a TaskOperatorConfig from a searched final_config blob.
-
-    - all_layers=True   ⇒ active_layers_per_slot=None (notebook 05)
-    - all_positions=True ⇒ template_active_ranks=None, n_template/n_content/n_output=-1,
-                            active_layers_per_slot=None (notebook 06; ignores fc)
-    - default            ⇒ use searched template_relative + n_content + n_output +
-                            active_stages_per_slot (notebook 04)
-    """
+    """Build a TaskOperatorConfig that activates *all* template / content /
+    output positions and *all* layers (the canonical "all positions" setting
+    used for the paper's main table)."""
 
     base = make_default_config(task, repetition_penalty=repetition_penalty)
-    if all_positions:
-        base.template_active_ranks = None
-        base.n_template = -1
-        base.n_content = -1
-        base.n_output = -1
-        base.active_layers_per_slot = None
-        return base
-    t = fc.get("template_relative")
-    base.template_active_ranks = list(t) if isinstance(t, list) else None
-    base.n_content = int(fc.get("n_content", -1))
-    base.n_output = int(fc.get("n_output", -1))
-    if all_layers:
-        base.active_layers_per_slot = None
-    else:
-        asps = fc.get("active_stages_per_slot") or {}
-        base.active_layers_per_slot = {sid: list(stgs) for sid, stgs in asps.items()}
+    base.template_active_ranks = None
+    base.n_template = -1
+    base.n_content = -1
+    base.n_output = -1
+    base.active_layers_per_slot = None
     return base
 
 
@@ -153,15 +127,6 @@ def load_validation_icl_outputs(
         outputs.append(r.get("generated_text", "") or "")
         kept.append(int(r.get("record_index", 0)))
     return outputs, kept
-
-
-def load_searched_config(hf_id: str, task: str) -> dict | None:
-    """Read the search trajectory's final_config.json (notebook 03 output) if present."""
-
-    _, fp = search_paths(hf_id, task)
-    if not fp.exists():
-        return None
-    return json.loads(fp.read_text())
 
 
 def _verify_settings_match(saved_settings: dict, current_settings: dict, *, path: Path) -> None:
@@ -412,197 +377,6 @@ def run_task_operator_setting(
             "n_prompt_records_total": int(payload.get("n_prompt_records_total", 0)),
             "n_gen_records_total": int(payload.get("n_gen_records_total", 0)),
             "wall_time_sec": float(payload.get("wall_time_sec", 0.0)),
-        }
-        if "stop_reason" in payload:
-            row["stop_reason"] = str(payload["stop_reason"])
-        append_row(shard, row, predictions_path_)
-
-    rows = shard["rows"]
-    acc = sum(float(r.get("score", 0.0)) for r in rows) / max(len(rows), 1)
-    return {
-        "knowledge_path": knowledge_path, "predictions_path": predictions_path_,
-        "n_rows": len(rows), "acc": acc, "skipped": False,
-    }
-
-
-def make_nto_config(task: str, *, K_0: float = 8.0,
-                    repetition_penalty: float = DEFAULT_REP_PENALTY,
-                    all_positions: bool = True) -> NTOConfig:
-    """NTO-equivalent of `config_from_searched(..., all_positions=True)`.
-
-    Mirrors `make_default_config` but produces an `NTOConfig` with the K_0
-    replay knob set; defaults to the all-positions/all-layers setting that
-    notebook 06 uses for the standard task operator.
-    """
-
-    base = make_default_config(task, repetition_penalty=repetition_penalty)
-    cfg = NTOConfig(
-        attention_sink=base.attention_sink,
-        demo_template=base.demo_template,
-        query_template=base.query_template,
-        n_template=-1 if all_positions else base.n_template,
-        n_content=-1 if all_positions else base.n_content,
-        n_output=-1 if all_positions else base.n_output,
-        template_active_ranks=None if all_positions else base.template_active_ranks,
-        active_layers_per_slot=None if all_positions else base.active_layers_per_slot,
-        repetition_penalty=base.repetition_penalty,
-        max_new_tokens=base.max_new_tokens,
-        stopping_strings=base.stopping_strings,
-        answer_phrases=base.answer_phrases,
-        do_sample=base.do_sample,
-        temperature=base.temperature,
-        top_p=base.top_p,
-        top_k=base.top_k,
-        K_0=float(K_0),
-    )
-    return cfg
-
-
-def run_nto_setting(
-    *,
-    hf_id: str,
-    task: str,
-    setting: str,
-    K_0: float,
-    config: NTOConfig,
-    demos,
-    validation_records,
-    validation_icl_outputs,
-    test_records,
-    model,
-    tokenizer,
-) -> dict:
-    """Run one NTO setting end-to-end with caching.
-
-    Knowledge (canonical θ, μ_C) is K_0-independent and cached at
-    `knowledge_nto.pt`; predictions are K_0-specific and cached at
-    `predictions_K0_<K_0>.json`. Mirrors `run_task_operator_setting`.
-
-    Returns dict with paths and final accuracy.
-    """
-
-    knowledge_path, predictions_path_ = nto_paths(hf_id, task, setting, K_0)
-    expected_n = len(test_records)
-
-    demo_ids = [r.get("example_id") for r in (demos or [])][:N_DEMOS]
-    val_ids = [r.get("example_id") for r in (validation_records or [])][:N_VALIDATION]
-    val_outputs_digest = _fingerprint({
-        "outputs": list(validation_icl_outputs or [])[:N_VALIDATION]
-    })
-
-    knowledge_blob = {
-        "method": "nto",
-        "n_demos": N_DEMOS,
-        "n_validation": len(validation_records),
-        "repetition_penalty": float(config.repetition_penalty),
-        "attention_sink": bool(config.attention_sink),
-        "demo_template": config.demo_template,
-        "query_template": config.query_template,
-        "n_template": int(config.n_template),
-        "n_content": int(config.n_content),
-        "n_output": int(config.n_output),
-        "template_active_ranks": list(config.template_active_ranks)
-        if config.template_active_ranks is not None else None,
-        "active_layers_per_slot": (
-            {k: list(v) for k, v in config.active_layers_per_slot.items()}
-            if config.active_layers_per_slot is not None else None
-        ),
-        "setting": setting,
-        "demo_example_ids": demo_ids,
-        "validation_example_ids": val_ids,
-        "validation_icl_outputs_digest": val_outputs_digest,
-    }
-    knowledge_blob["fingerprint"] = _fingerprint(knowledge_blob)
-
-    predictions_settings = {
-        **{k: v for k, v in knowledge_blob.items() if k != "fingerprint"},
-        "K_0": float(K_0),
-        "n_records": int(expected_n),
-        "max_new_tokens": int(config.max_new_tokens),
-        "stopping_strings": list(config.stopping_strings or []),
-        "do_sample": bool(config.do_sample),
-        "temperature": float(config.temperature),
-        "top_p": float(config.top_p),
-        "top_k": int(config.top_k),
-        "knowledge_fingerprint": knowledge_blob["fingerprint"],
-    }
-    if config.answer_phrases:
-        predictions_settings["answer_phrases"] = list(config.answer_phrases)
-    predictions_settings["fingerprint"] = _fingerprint(predictions_settings)
-
-    shard = load_or_init_shard(
-        predictions_path_,
-        lambda: {
-            "method": "nto", "hf_id": hf_id, "task": task,
-            "setting": setting, "K_0": float(K_0),
-            "settings": predictions_settings, "rows": [],
-        },
-    )
-    _verify_settings_match(shard.get("settings") or {}, predictions_settings, path=predictions_path_)
-    if is_shard_complete(shard, expected_n):
-        rows = shard["rows"]
-        acc = sum(float(r.get("score", 0.0)) for r in rows) / max(len(rows), 1)
-        return {
-            "knowledge_path": knowledge_path, "predictions_path": predictions_path_,
-            "n_rows": len(rows), "acc": acc, "skipped": True,
-        }
-
-    mean_circuit = None
-    if knowledge_path.exists():
-        loaded = torch.load(knowledge_path, map_location="cpu", weights_only=False)
-        if isinstance(loaded, dict) and "mean_circuit" in loaded:
-            saved_fp = loaded.get("fingerprint")
-            if saved_fp is None or saved_fp == knowledge_blob["fingerprint"]:
-                mean_circuit = loaded["mean_circuit"]
-            else:
-                diff = diff_settings(loaded.get("settings") or {}, knowledge_blob)
-                raise RuntimeError(
-                    f"NTO knowledge fingerprint mismatch at {knowledge_path}\n"
-                    f"  saved={saved_fp}  current={knowledge_blob['fingerprint']}\n"
-                    f"  differing keys: {diff}\n"
-                    f"  delete the file to recompute."
-                )
-
-    if mean_circuit is None:
-        mean_circuit = extract_canonical_knowledge(
-            model, tokenizer, demos, validation_records, validation_icl_outputs, config,
-        )
-        knowledge_path.parent.mkdir(parents=True, exist_ok=True)
-        torch.save(
-            {
-                "mean_circuit": mean_circuit,
-                "fingerprint": knowledge_blob["fingerprint"],
-                "settings": knowledge_blob,
-            },
-            knowledge_path,
-        )
-
-    apply_config = NTOConfig(
-        **{f.name: getattr(config, f.name) for f in __import__("dataclasses").fields(config)}
-    )
-    apply_config.K_0 = float(K_0)
-
-    done = {int(r["record_index"]) for r in shard.get("rows", [])}
-    for idx, record in enumerate(test_records):
-        if idx in done:
-            continue
-        payload = apply_canonical_task_operator(model, tokenizer, record, mean_circuit, apply_config)
-        scored = evaluate_generation(task, payload["generated_text"], record.get("target") or "")
-        row = {
-            "record_index": int(idx),
-            "example_id": record.get("example_id"),
-            "input": record.get("input"),
-            "target": record.get("target"),
-            "generated_text": scored["generated_text"],
-            "parsed_answer": scored["parsed_answer"],
-            "parsed_target": scored["parsed_target"],
-            "is_correct": bool(scored["is_correct"]),
-            "score": float(scored["score"]),
-            "n_generated_tokens": int(payload.get("generated_tokens", 0)),
-            "n_prompt_records_total": int(payload.get("n_prompt_records_total", 0)),
-            "n_gen_records_total": int(payload.get("n_gen_records_total", 0)),
-            "wall_time_sec": float(payload.get("wall_time_sec", 0.0)),
-            "K_0": float(K_0),
         }
         if "stop_reason" in payload:
             row["stop_reason"] = str(payload["stop_reason"])

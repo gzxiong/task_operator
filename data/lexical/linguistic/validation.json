@@ -1,0 +1,169 @@
+{
+  "task": "linguistic",
+  "category": "lexical",
+  "split": "validation",
+  "seed": 0,
+  "n_records": 32,
+  "records": [
+    {
+      "example_id": "linguistic_0062",
+      "input": "gallows",
+      "target": "gallows"
+    },
+    {
+      "example_id": "linguistic_0149",
+      "input": "tableau",
+      "target": "tableaus"
+    },
+    {
+      "example_id": "linguistic_0164",
+      "input": "vertex",
+      "target": "vertices"
+    },
+    {
+      "example_id": "linguistic_0083",
+      "input": "libretto",
+      "target": "libretti"
+    },
+    {
+      "example_id": "linguistic_0124",
+      "input": "radius",
+      "target": "radii"
+    },
+    {
+      "example_id": "linguistic_0084",
+      "input": "life",
+      "target": "lives"
+    },
+    {
+      "example_id": "linguistic_0113",
+      "input": "paralysis",
+      "target": "paralyses"
+    },
+    {
+      "example_id": "linguistic_0003",
+      "input": "alumna",
+      "target": "alumnae"
+    },
+    {
+      "example_id": "linguistic_0107",
+      "input": "occiput",
+      "target": "occipita"
+    },
+    {
+      "example_id": "linguistic_0066",
+      "input": "graffito",
+      "target": "graffiti"
+    },
+    {
+      "example_id": "linguistic_0159",
+      "input": "trout",
+      "target": "trout"
+    },
+    {
+      "example_id": "linguistic_0120",
+      "input": "potato",
+      "target": "potatoes"
+    },
+    {
+      "example_id": "linguistic_0052",
+      "input": "emphasis",
+      "target": "emphases"
+    },
+    {
+      "example_id": "linguistic_0023",
+      "input": "cactus",
+      "target": "cacti"
+    },
+    {
+      "example_id": "linguistic_0102",
+      "input": "neurosis",
+      "target": "neuroses"
+    },
+    {
+      "example_id": "linguistic_0025",
+      "input": "carcinoma",
+      "target": "carcinomata"
+    },
+    {
+      "example_id": "linguistic_0080",
+      "input": "knife",
+      "target": "knives"
+    },
+    {
+      "example_id": "linguistic_0133",
+      "input": "shelf",
+      "target": "shelves"
+    },
+    {
+      "example_id": "linguistic_0010",
+      "input": "apex",
+      "target": "apices"
+    },
+    {
+      "example_id": "linguistic_0024",
+      "input": "calf",
+      "target": "calves"
+    },
+    {
+      "example_id": "linguistic_0169",
+      "input": "wharf",
+      "target": "wharves"
+    },
+    {
+      "example_id": "linguistic_0122",
+      "input": "prognosis",
+      "target": "prognoses"
+    },
+    {
+      "example_id": "linguistic_0064",
+      "input": "glomerulus",
+      "target": "glomeruli"
+    },
+    {
+      "example_id": "linguistic_0091",
+      "input": "means",
+      "target": "means"
+    },
+    {
+      "example_id": "linguistic_0090",
+      "input": "matrix",
+      "target": "matrices"
+    },
+    {
+      "example_id": "linguistic_0055",
+      "input": "fez",
+      "target": "fezes"
+    },
+    {
+      "example_id": "linguistic_0103",
+      "input": "news",
+      "target": "news"
+    },
+    {
+      "example_id": "linguistic_0077",
+      "input": "index",
+      "target": "indices"
+    },
+    {
+      "example_id": "linguistic_0126",
+      "input": "salmon",
+      "target": "salmon"
+    },
+    {
+      "example_id": "linguistic_0098",
+      "input": "moose",
+      "target": "moose"
+    },
+    {
+      "example_id": "linguistic_0000",
+      "input": "addendum",
+      "target": "addenda"
+    },
+    {
+      "example_id": "linguistic_0151",
+      "input": "that",
+      "target": "those"
+    }
+  ]
+}

@@ -1,4 +1,9 @@
-"""Resumable shard I/O for predictions / search trajectories / task_operator outputs."""
+"""Resumable shard I/O for predictions / task_operator / baselines outputs.
+
+The outputs root is resolved on every call from the `TASK_OPERATOR_OUTPUTS`
+env var, falling back to `./outputs/` next to the package. Set the env var
+before running scripts to redirect outputs (e.g. `TASK_OPERATOR_OUTPUTS=/path/to/run`).
+"""
 
 from __future__ import annotations
 
@@ -9,33 +14,24 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-_OUTPUTS_DIR_ENV = "CIRICL_OUTPUTS_DIR"
-_DEFAULT_OUTPUTS_DIR = PROJECT_ROOT / "outputs_final_v2"
+PACKAGE_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = PACKAGE_ROOT.parent
+_OUTPUTS_DIR_ENV = "TASK_OPERATOR_OUTPUTS"
+_DEFAULT_OUTPUTS_DIR = REPO_ROOT / "outputs"
 
 
 def _outputs_dir() -> Path:
-    """Resolve the outputs root on every call. If `CIRICL_OUTPUTS_DIR` is set in
-    the environment, use that; otherwise fall back to `outputs_final_v2/` next to
-    the project root. Notebooks that target a different tree (e.g.
-    `outputs_final_v2_rep_1.0/`) should set the env var in their config cell
-    *before* importing from `src_final_v2`. The path helpers below re-read the
-    env var on every call so even late-set values take effect.
-
-    A relative path in the env var is resolved against `PROJECT_ROOT` so
-    notebooks can use `'outputs_final_v2_rep_1.0'` and stay portable across
-    servers with the same project layout but different absolute roots.
-    """
+    """Resolve the outputs root on every call. A relative path in the env var
+    is resolved against the repo root."""
 
     val = os.environ.get(_OUTPUTS_DIR_ENV)
     if not val:
         return _DEFAULT_OUTPUTS_DIR
     p = Path(val)
-    return p if p.is_absolute() else (PROJECT_ROOT / p)
+    return p if p.is_absolute() else (REPO_ROOT / p)
 
 
-# Snapshot at import time, for code that does `from src_final_v2 import OUTPUTS_DIR`
-# (e.g., the summary cells at the bottom of every experiment notebook).
+# Snapshot at import time, for `from task_operator import OUTPUTS_DIR`.
 OUTPUTS_DIR = _outputs_dir()
 
 
@@ -49,27 +45,9 @@ def predictions_path(hf_id: str, task: str, condition: str) -> Path:
     return _outputs_dir() / "predictions" / safe_model_name(hf_id) / task / f"{condition}.json"
 
 
-def search_paths(hf_id: str, task: str) -> tuple[Path, Path]:
-    base = _outputs_dir() / "search" / safe_model_name(hf_id) / task
-    return base / "trajectory.json", base / "final_config.json"
-
-
 def task_operator_paths(hf_id: str, task: str, setting: str) -> tuple[Path, Path]:
     base = _outputs_dir() / "task_operator" / safe_model_name(hf_id) / task / setting
     return base / "knowledge.pt", base / "predictions.json"
-
-
-def nto_paths(hf_id: str, task: str, setting: str, K_0: float) -> tuple[Path, Path]:
-    """Path scheme for the Normalized Task Operator (canonical θ, μ_C).
-
-    Knowledge is K_0-independent (one extraction reused across the K_0 sweep);
-    predictions are K_0-specific.
-    """
-
-    base = _outputs_dir() / "nto" / safe_model_name(hf_id) / task / setting
-    f = float(K_0)
-    tag = str(int(f)) if f == int(f) else str(f).replace(".", "p")
-    return base / "knowledge_nto.pt", base / f"predictions_K0_{tag}.json"
 
 
 def baselines_paths(hf_id: str, task: str, baseline: str) -> tuple[Path, Path]:
@@ -105,11 +83,7 @@ def append_row(shard: dict, row: dict, path: Path) -> None:
 
 
 def is_shard_complete(shard: dict, expected_n: int) -> bool:
-    """Complete iff every record_index in `range(expected_n)` is present at least once.
-
-    Length alone is unsafe under parallel writers — a duplicated index plus a missing one
-    would still pass `len(rows) >= expected_n`.
-    """
+    """Complete iff every record_index in range(expected_n) is present at least once."""
 
     rows = shard.get("rows") or []
     seen: set[int] = set()
@@ -130,9 +104,8 @@ def _canonical_json(blob: Any) -> str:
 
 
 def fingerprint(blob: Any, *, length: int = 16) -> str:
-    """Stable short hash of any JSON-serializable blob. Used to detect cached results that
-    were produced under settings different from the current ones.
-    """
+    """Stable short hash of any JSON-serializable blob; used to detect cached
+    results produced under settings different from the current ones."""
 
     return hashlib.sha256(_canonical_json(blob).encode("utf-8")).hexdigest()[:length]
 

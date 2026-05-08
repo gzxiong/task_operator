@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "task_operator"
+version = "0.1.0"
+description = "Capturing In-Context Learning Dynamics with Task Operators"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.35.0",
+    "numpy>=1.24.0",
+    "tqdm>=4.65.0",
+    "matplotlib>=3.7.0",
+]
+
+[project.optional-dependencies]
+data = ["datasets>=2.14.0"]
+
+[tool.setuptools.packages.find]
+include = ["task_operator*"]
