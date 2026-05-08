@@ -22,8 +22,7 @@ diagonal-scale-plus-bias update on `W_O` during ZSL inference.
 
 ## Install
 
-Requires Python ≥ 3.10 and a single CUDA GPU; an A100 fits the 8 B models
-comfortably. From the repo root:
+Requires Python ≥ 3.10. From the repo root:
 
 ```bash
 pip install -e .
@@ -40,13 +39,12 @@ python examples/quickstart.py
 ```
 
 Loads Qwen3-4B + the `uppercase` task, runs ZSL, 8-shot ICL, then extracts a
-TO and applies it at ZSL — printing the three accuracies side by side. Should
-finish in a few minutes on a single A100.
+TO and applies it at ZSL. Prints the three accuracies side by side.
 
 ## Reproducing the main table
 
 The paper reports a 4-model × 8-task grid of (ZSL, ICL, TV, FV, ICV,
-Conceptors, TO). Every run is resumable — rerunning a script skips records
+Conceptors, TO). Every run is resumable. Rerunning a script skips records
 already present in the shard. Outputs land under `outputs/` (override with
 `TASK_OPERATOR_OUTPUTS=...`).
 
