@@ -1,12 +1,16 @@
 # Task Operator
 
-Code for **Capturing In-Context Learning Dynamics with Task Operators**.
+[![Homepage](https://img.shields.io/badge/Homepage-available-blue)](https://gzxiong.github.io/task_operator/)
+[![arXiv](https://img.shields.io/badge/arXiv-2610.01054-b31b1b.svg)](https://arxiv.org/abs/2610.01054)
+
+Code for **Capturing In-Context Learning Dynamics with Task Operators** (NeurIPS 2026).
 
 A Task Operator (TO) extracts an analytic per-(layer, head, position) affine
-operator `(w, b)` from one ICL forward pass, then replays it as a dynamic
-update to the attention output projection at zero-shot inference. Across four
-LLMs and eight tasks the method recovers most of the gap between zero-shot
-and full ICL while paying only the zero-shot context cost.
+operator `(w, b)` from ICL forward passes, then replays it as a dynamic update
+to the attention output projection at zero-shot inference. Across four LLMs
+and eight tasks, TO achieves the best overall performance among prior ICL
+extraction methods and substantially narrows the gap between zero-shot
+inference and full ICL, while paying only the zero-shot context cost.
 
 The key identity, derived in the paper, is that for every attention head
 
@@ -17,8 +21,9 @@ The key identity, derived in the paper, is that for every attention head
 where `u'_t` is the head output with attention to the demonstration context
 masked out, `w_t = Z'_t / Z_t` is the fraction of softmax mass on non-context
 positions, and `b_t = Σ_{i∈C} α_{t,i} v_i` is the context contribution. The
-parameters are extracted from a few validation samples and applied as a
-diagonal-scale-plus-bias update on `W_O` during ZSL inference.
+parameters are averaged over `m` unlabeled validation queries (`--m`, default
+32) and applied as a diagonal-scale-plus-bias update on `W_O` during ZSL
+inference.
 
 ## Install
 
@@ -149,3 +154,16 @@ for rec in test:
 Reasoning tasks use a Chain-of-Thought template ("Let's think step by step.")
 in both demos and the zero-shot query; lexical and algorithmic tasks use the
 bare `Input: ... \nOutput:` template.
+
+## Citation
+
+If you use Task Operators, please consider citing
+
+```bibtex
+@inproceedings{xiong2026capturing,
+  title     = {Capturing In-Context Learning Dynamics with Task Operators},
+  author    = {Guangzhi Xiong and Zhenghao He and Bohan Liu and Sanchit Sinha and Wenqian Ye and Aidong Zhang},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2026}
+}
+```
