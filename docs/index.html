@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Task Operators: Capturing In-Context Learning Dynamics (NeurIPS 2026)</title>
-  <meta name="description" content="Task Operator (TO) captures in-context learning as per-head affine transformations of attention outputs and replays them at zero-shot cost, without demonstrations or training. NeurIPS 2026.">
+  <meta name="description" content="Task Operators characterize how in-context demonstrations affect attention, capture input-dependent task knowledge, and reveal where this knowledge is utilized across layers and token positions. NeurIPS 2026.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Capturing In-Context Learning Dynamics with Task Operators">
-  <meta property="og:description" content="Training-free replay of in-context learning via per-head affine transformations of attention outputs. NeurIPS 2026.">
+  <meta property="og:description" content="Understanding how in-context demonstrations change a language model's computation with Task Operators. NeurIPS 2026.">
   <meta property="og:url" content="https://gzxiong.github.io/task_operator/">
   <meta property="og:image" content="https://gzxiong.github.io/task_operator/static/images/framework.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -63,20 +63,20 @@
   <section class="block" id="overview">
     <div class="overview">
       <div class="label">Overview</div>
-      <div class="ov-title">Can a model keep what it learned in context, without the demonstrations?</div>
-      <p>In-context learning (ICL) lets a language model pick up a task from a few demonstrations, but every query has to reprocess them, and methods that compress ICL into fixed activation vectors break down when the output depends closely on the input. We show that ICL changes every attention head in an exact, affine way. <b>Task Operator (TO)</b> extracts that change once and replays it through the attention output projection, so inference needs no demonstrations and no training, and costs the same as zero-shot.</p>
+      <div class="ov-title">How do in-context demonstrations change a language model's computation?</div>
+      <p>In-context learning (ICL) allows language models to adapt to tasks without updating their weights. But how do demonstrations change the way a model processes its input? Previous studies suggest that task knowledge can be captured by fixed activation vectors, which struggle to explain the input-dependent behavior of more complex tasks.</p>
+      <p>We show that demonstrations affect each attention head through an exact affine transformation: rescaling its context-masked output and adding information retrieved from demonstrations. This observation leads to <b>Task Operator (TO)</b>, a method that captures these transformations and enables us to reproduce and investigate ICL behavior.</p>
       <ul>
-        <li>Best overall among methods that extract and replay ICL (Task Vectors, Function Vectors, In-Context Vectors, Conceptors) across <b>4</b> LLMs and <b>8</b> tasks.</li>
-        <li>Recovers most of the ICL gain where fixed vectors fail: <b>60.16%</b> on Qwen3-8B Reverse, versus <b>21.09%</b> for the best baseline and 67.19% for 8-shot ICL.</li>
-        <li>With <b>8</b> demonstrations and no training, it outperforms trained input-dependent methods (ATV, ICR) in every setting but one, even when they train on up to <b>16&times;</b> more examples.</li>
-        <li>Averaging operators over disjoint 8-shot batches scales to <b>64</b> demonstrations without a longer context.</li>
+        <li><b>Beyond fixed vectors:</b> TO recovers input-dependent task behavior where existing methods struggle, achieving 60.16% on Qwen3-8B Reverse, compared to 21.09% for the best baseline and 67.19% for ICL.</li>
+        <li><b>Where task knowledge resides:</b> TO reveals sparse, task-specific patterns across layers and token positions, with different tasks relying on different intervention sites.</li>
+        <li><b>Recovering ICL behavior:</b> TO achieves the best overall performance among existing ICL extraction methods across 4 LLMs and 8 tasks, without training or demonstrations at inference time.</li>
       </ul>
     </div>
   </section>
 
   <section class="block" id="method">
     <div class="label">Method</div>
-    <h2>ICL is an affine update to every attention head</h2>
+    <h2>Characterizing the effect of demonstrations on attention</h2>
     <p>Split a head's attention between the demonstration tokens \(\mathcal{C}\) and all other tokens. Renormalizing the softmax over the non-demonstration tokens gives the context-masked output \(\mathbf{u}'\), and the head output under ICL is then exactly</p>
     <div class="eqbox">
       <div class="eqrow">
@@ -88,9 +88,17 @@
       </div>
       <div class="legend">\(w = Z'/Z\): softmax mass left on non-demonstration tokens &nbsp;&middot;&nbsp; \(\mathbf{b} = \sum_{i \in \mathcal{C}} \alpha_i \mathbf{v}_i\) &nbsp;&middot;&nbsp; \(\mathcal{C}\): demonstration positions</div>
     </div>
-    <p>The identity holds for every input, head, and layer, and the parameters \((w, \mathbf{b})\) are stable across queries of the same task. Folding them into the attention output projection, \(\widetilde{\mathbf{W}}_O = \mathbf{W}_O \mathbf{D}_w\) and \(\widetilde{\mathbf{b}}_O = \mathbf{W}_O \mathbf{B} + \mathbf{b}_O\), turns ICL into an input-dependent reparameterization that can be replayed without the demonstrations.</p>
+    <p>The identity holds for every input, head, and layer, revealing two distinct effects of demonstrations on attention: rescaling the contribution from non-demonstration tokens and adding information retrieved from demonstrations. We empirically find that the affine parameters are relatively stable across queries of the same task, suggesting that these transformations capture task-specific knowledge.</p>
+    <p>By incorporating these parameters into the attention output projection, Task Operator captures demonstration-induced changes while preserving interactions with the current input.</p>
+    <div>
+      $$\begin{aligned}
+      \widetilde{\mathbf{W}}_O &= \mathbf{W}_O \mathbf{D}_w,\\
+      \widetilde{\mathbf{b}}_O &= \mathbf{W}_O \mathbf{B} + \mathbf{b}_O
+      \end{aligned}$$
+    </div>
+    <p>Unlike fixed additive vectors, the operator transforms the current attention output rather than simply adding a task-specific activation.</p>
 
-    <h3>Task Operator: extract once, replay at zero-shot cost</h3>
+    <h3>Task Operator: capturing and replaying ICL dynamics</h3>
     <figure class="fig">
       <img src="static/images/framework.png" alt="Task Operator framework: knowledge extraction, knowledge replay, and knowledge sparsification">
       <figcaption>Task Operator extracts per-head affine parameters \((w, \mathbf{b})\) from ICL forward passes (left), replays them through an updated output projection at zero-shot inference (middle), and sparsifies them to the most important sites (right). Yellow blocks are demonstration tokens; blue blocks are tokens of the input query.</figcaption>
@@ -125,7 +133,7 @@
 
   <section class="block" id="results">
     <div class="label">Results</div>
-    <h2>Closing the gap to in-context learning</h2>
+    <h2>Recovering ICL behavior with Task Operators</h2>
     <p>We evaluate four LLMs on eight tasks: two lexical (Translation, Linguistic), three algorithmic (Uppercase, Reverse, Deduplicate), and three reasoning (GSM8K, MATH500, GPQA-Diamond). Every extraction method uses the same \(K = 8\) demonstrations; zero-shot (ZSL) and 8-shot ICL are shown for reference.</p>
     <p class="tcap"><b>Test accuracy (%) across models and tasks.</b> Select a model to view its results.</p>
     <div id="to-main">
@@ -196,9 +204,9 @@
     </div>
     <p class="table-note">ICL uses \(K = 8\) demonstrations in the prompt; all other rows run without demonstrations. Bold marks the best method without demonstrations.</p>
     <ul class="findings">
-      <li>On lexical tasks and Uppercase, where Task Vectors already recover much of the ICL gain, TO matches or exceeds the best baseline and comes close to ICL.</li>
-      <li>On Reverse and Deduplicate, where the output depends intricately on the input, fixed-vector baselines largely fail while TO recovers much of the ICL gain.</li>
-      <li>TO mirrors ICL rather than adding a generic boost: when ICL itself barely helps, as on MATH500 and GPQA for the Llama models, TO does not improve over zero-shot either.</li>
+      <li>On lexical tasks and Uppercase, where fixed activation vectors already capture much of the ICL behavior, TO matches or exceeds the best baseline and comes close to ICL.</li>
+      <li>On Reverse and Deduplicate, where task execution requires more intricate interactions with the input, TO recovers substantially more of the ICL gain than fixed-vector methods.</li>
+      <li>TO tends to reflect the benefits and limitations of ICL itself: when demonstrations provide little improvement, TO generally yields limited gains over zero-shot inference.</li>
     </ul>
 
     <h3 id="trained">Versus trained input-dependent methods</h3>
@@ -220,24 +228,18 @@
 
   <section class="block" id="analysis">
     <div class="label">Analysis</div>
-    <h2>Where ICL knowledge lives, and how it scales</h2>
+    <h2>What do Task Operators reveal about ICL?</h2>
 
-    <h3 id="circuits" style="margin-top: 8px;">Sparse, task-specific circuits</h3>
-    <p>Importance maps on Llama3.1-8B show that the knowledge captured by TO sits in a small subset of sites, and where that subset is depends on the task. Uppercase relies on template tokens within a few layers; Reverse spreads across template and content tokens; Deduplicate concentrates on output positions in the middle layers. Methods that intervene only at fixed template positions miss the knowledge that the more complex tasks need.</p>
+    <h3 id="circuits" style="margin-top: 8px;">Where does task knowledge reside?</h3>
+    <p>The importance maps on Llama3.1-8B reveal that task knowledge captured by TO is concentrated at a sparse set of sites, with distinct patterns across tasks. Uppercase primarily relies on template positions within a few layers, Reverse involves both template and content positions, and Deduplicate concentrates on output positions in the middle layers. These findings help explain why interventions restricted to fixed template positions struggle with more complex tasks.</p>
     <figure class="fig">
       <img src="static/images/sparsity_llama3_8b.png" alt="Per-site importance maps for Uppercase, Reverse, and Deduplicate on Llama3.1-8B">
       <figcaption>Per-site importance on Llama3.1-8B. Brighter cells are more important; token labels are colored by position type (template, content, output).</figcaption>
     </figure>
 
-    <h3 id="scaling">Many-shot scaling without a longer context</h3>
-    <p>Extracting one operator from a very long prompt becomes noisy as \(K\) grows, because \(w\) approaches zero. Averaging operators from disjoint 8-shot batches, denoted <b>TO (batch)</b>, gives non-decreasing accuracy up to \(K = 64\) and even surpasses standard ICL on Deduplicate at \(K = 64\), while each forward pass only sees eight demonstrations.</p>
-    <figure class="fig">
-      <img src="static/images/k_scaling_llama3_8b.png" alt="Accuracy of ICL, Task Vectors, TO, and TO (batch) as the number of demonstrations K grows">
-      <figcaption>Effect of the number of demonstrations \(K\) on Llama3.1-8B with \(m = 32\) validation prompts. TO (batch) averages operators from disjoint 8-shot batches.</figcaption>
-    </figure>
-
-    <h3 id="ablation">What makes the operator work</h3>
-    <p>On Qwen3-4B, lexical tasks and Uppercase rely almost entirely on template positions, whereas Reverse, Deduplicate, and the reasoning tasks also need content and output positions. At template positions, the scaling \(w\) and the bias \(\mathbf{b}\) are individually insufficient, since each alone collapses to zero accuracy on the non-reasoning tasks, but together they recover ICL behavior.</p>
+    <h3 id="ablation">What makes task adaptation input-dependent?</h3>
+    <p>Our ablation studies on Qwen3-4B show that template positions are largely sufficient for lexical tasks and Uppercase, while Reverse, Deduplicate, and reasoning tasks also benefit from interventions at content and output positions.</p>
+    <p>At template positions, neither the multiplicative scaling nor the additive bias alone recovers ICL behavior on non-reasoning tasks. Their combination is essential, highlighting the importance of capturing both effects of demonstrations on attention.</p>
     <p class="tcap"><b>Position-type and affine-component ablations on Qwen3-4B.</b> Accuracy (%).</p>
 <div class="tight">
 <div class="table-wrap"><table class="res">
@@ -258,6 +260,13 @@
 </tbody></table></div>
 </div>
     <p class="table-note">The top rows vary which position types receive the operator; the bottom rows isolate the scaling (\(w\)) and bias (\(\mathbf{b}\)) components at template positions.</p>
+
+    <h3 id="scaling">Many-shot scaling without a longer context</h3>
+    <p>Extracting one operator from a very long prompt becomes noisy as \(K\) grows, because \(w\) approaches zero. Averaging operators from disjoint 8-shot batches, denoted <b>TO (batch)</b>, gives non-decreasing accuracy up to \(K = 64\) and even surpasses standard ICL on Deduplicate at \(K = 64\), while each forward pass only sees eight demonstrations.</p>
+    <figure class="fig">
+      <img src="static/images/k_scaling_llama3_8b.png" alt="Accuracy of ICL, Task Vectors, TO, and TO (batch) as the number of demonstrations K grows">
+      <figcaption>Effect of the number of demonstrations \(K\) on Llama3.1-8B with \(m = 32\) validation prompts. TO (batch) averages operators from disjoint 8-shot batches.</figcaption>
+    </figure>
   </section>
 
   <section class="block" id="bibtex">
